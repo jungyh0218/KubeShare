@@ -1,14 +1,17 @@
 # call from repo root
 
-FROM nvidia/cuda:10.0-devel AS build
+FROM nvidia/cuda:11.6.1-devel-ubuntu20.04 AS build
 
 WORKDIR /tmp/build
 
 COPY . kubeshare
 
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=US/Central
+
 RUN apt update && \
-    apt install -y git && \
-    git clone https://github.com/NTHU-LSALAB/Gemini.git && cd Gemini && \
+    apt install -y git tzdata pkg-config libzmq3-dev libglib2.0-dev libgio2.0-cil-dev && \
+    git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && git checkout master && \
     make -C src
 
 FROM python:3.8.1-buster
@@ -24,6 +27,6 @@ COPY docker/lib/libnvidia-ml.so.1   /lib
 COPY --from=build /tmp/build/kubeshare/docker/kubeshare-gemini-scheduler/launcher-multigpus.sh /launcher-multigpus.sh
 COPY --from=build /tmp/build/kubeshare/docker/kubeshare-gemini-scheduler/launcher.py /launcher.py
 COPY --from=build /tmp/build/Gemini/bin/gem-schd /gem-schd
-COPY --from=build /tmp/build/Gemini/bin/gem-pmgr /gem-pmgr
+#COPY --from=build /tmp/build/Gemini/bin/gem-pmgr /gem-pmgr
 
 CMD ["/launcher-multigpus.sh", "/kubeshare/scheduler/config", "/kubeshare/scheduler/podmanagerport"]

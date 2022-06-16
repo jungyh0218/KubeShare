@@ -1,6 +1,6 @@
 # call from repo root
 
-FROM nvidia/cuda:10.0-devel AS build
+FROM nvidia/11.6.1-devel-ubuntu20.04 AS build
 
 WORKDIR /tmp/build
 
