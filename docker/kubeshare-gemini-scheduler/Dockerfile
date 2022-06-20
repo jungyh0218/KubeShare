@@ -15,8 +15,9 @@ RUN apt update && \
     make -C src
 
 FROM python:3.8.1-buster
-
 RUN pip3 install inotify
+RUN apt update && \
+    apt install -y tzdata pkg-config libzmq3-dev libglib2.0-dev libgio2.0-cil-dev 
 
 ENV NVIDIA_VISIBLE_DEVICES      all
 ENV NVIDIA_DRIVER_CAPABILITIES  utility
@@ -27,6 +28,6 @@ COPY docker/lib/libnvidia-ml.so.1   /lib
 COPY --from=build /tmp/build/kubeshare/docker/kubeshare-gemini-scheduler/launcher-multigpus.sh /launcher-multigpus.sh
 COPY --from=build /tmp/build/kubeshare/docker/kubeshare-gemini-scheduler/launcher.py /launcher.py
 COPY --from=build /tmp/build/Gemini/bin/gem-schd /gem-schd
-#COPY --from=build /tmp/build/Gemini/bin/gem-pmgr /gem-pmgr
+COPY --from=build /tmp/build/Gemini/bin/gem-pmgr /gem-pmgr
 
 CMD ["/launcher-multigpus.sh", "/kubeshare/scheduler/config", "/kubeshare/scheduler/podmanagerport"]

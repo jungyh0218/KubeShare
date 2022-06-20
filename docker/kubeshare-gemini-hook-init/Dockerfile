@@ -1,12 +1,15 @@
 # call from repo root
 
-FROM nvidia/11.6.1-devel-ubuntu20.04 AS build
+FROM nvidia/cuda:11.6.1-devel-ubuntu20.04 AS build
 
 WORKDIR /tmp/build
 
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=US/Central
+
 RUN apt update && \
-    apt install -y git && \
-    git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && git checkout cuda-version-upgrade \
+    apt install -y git tzdata pkg-config libzmq3-dev libglib2.0-dev libgio2.0-cil-dev && \
+    git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && \
     make -C src
 
 # FROM busybox:1.31.1-glibc
