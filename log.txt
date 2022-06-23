@@ -1,0 +1,1119 @@
+Sending build context to Docker daemon  4.165MB
+Step 1/19 : FROM nvidia/cuda:11.6.1-devel-ubuntu20.04 AS build
+ ---> dbefa5670be3
+Step 2/19 : WORKDIR /tmp/build
+ ---> Using cache
+ ---> a558ebe7663c
+Step 3/19 : COPY . kubeshare
+ ---> d19c88dd4e86
+Step 4/19 : ARG DEBIAN_FRONTEND=noninteractive
+ ---> Running in 07856889ae6e
+Removing intermediate container 07856889ae6e
+ ---> c35bd2104a20
+Step 5/19 : ENV TZ=US/Central
+ ---> Running in d8d0a5957e6a
+Removing intermediate container d8d0a5957e6a
+ ---> dcb2b3af6ac0
+Step 6/19 : RUN apt update &&     apt install -y git tzdata pkg-config libzmq3-dev libglib2.0-dev libgio2.0-cil-dev &&     git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && git checkout master &&     make -C src
+ ---> Running in a075f4bd6e73
+[91m
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+[0mGet:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64  InRelease [1581 B]
+Get:2 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal InRelease [265 kB]
+Get:4 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64  Packages [579 kB]
+Get:5 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1324 kB]
+Get:6 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1974 kB]
+Get:7 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [881 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [27.5 kB]
+Get:9 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:10 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [177 kB]
+Get:12 http://archive.ubuntu.com/ubuntu focal/restricted amd64 Packages [33.4 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [11.3 MB]
+Get:14 http://archive.ubuntu.com/ubuntu focal/main amd64 Packages [1275 kB]
+Get:15 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [1170 kB]
+Get:16 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [1404 kB]
+Get:17 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [2407 kB]
+Get:18 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [30.3 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [54.2 kB]
+Get:20 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [27.1 kB]
+Fetched 23.3 MB in 4s (6117 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+34 packages can be upgraded. Run 'apt list --upgradable' to see them.
+[91m
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+[0mReading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  binfmt-support ca-certificates-mono cli-common comerr-dev file git-man
+  krb5-locales krb5-multidev less libblkid-dev libbrotli1 libbsd0 libcbor0.6
+  libcom-err2 libcurl3-gnutls libedit2 libelf1 liberror-perl libexpat1
+  libffi-dev libfido2-1 libgio-cil libglib2.0-0 libglib2.0-bin libglib2.0-cil
+  libglib2.0-data libglib2.0-dev-bin libgssapi-krb5-2 libgssrpc4 libicu66
+  libk5crypto3 libkadm5clnt-mit11 libkadm5srv-mit11 libkdb5-9 libkeyutils1
+  libkrb5-3 libkrb5-dev libkrb5support0 libmagic-mgc libmagic1
+  libmono-btls-interface4.0-cil libmono-corlib4.5-cil libmono-i18n-west4.0-cil
+  libmono-i18n4.0-cil libmono-security4.0-cil
+  libmono-system-configuration4.0-cil libmono-system-core4.0-cil
+  libmono-system-numerics4.0-cil libmono-system-security4.0-cil
+  libmono-system-xml4.0-cil libmono-system4.0-cil libmount-dev libmpdec2
+  libnghttp2-14 libnorm-dev libnorm1 libpcre16-3 libpcre2-16-0 libpcre2-32-0
+  libpcre2-dev libpcre2-posix2 libpcre3 libpcre3-dev libpcre32-3 libpcrecpp0v5
+  libpgm-5.2-0 libpgm-dev libpipeline1 libpsl5 libpython3-stdlib
+  libpython3.8-minimal libpython3.8-stdlib librtmp1 libselinux1-dev libsepol1
+  libsepol1-dev libsodium-dev libsodium23 libssh-4 libx11-6 libx11-data
+  libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxmuu1 libzmq5 mime-support
+  mono-4.0-gac mono-gac mono-runtime mono-runtime-common mono-runtime-sgen
+  openssh-client publicsuffix python3 python3-distutils python3-lib2to3
+  python3-minimal python3.8 python3.8-minimal shared-mime-info uuid-dev xauth
+  xdg-user-dirs zlib1g-dev
+Suggested packages:
+  doc-base gettext-base git-daemon-run | git-daemon-sysvinit git-doc git-el
+  git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn krb5-doc
+  monodoc-gtk2.0-manual libgirepository1.0-dev libglib2.0-doc
+  libgdk-pixbuf2.0-bin | libgdk-pixbuf2.0-dev libxml2-utils krb5-user
+  libmono-i18n4.0-all libasound2 libgamin0 libnorm-doc xdg-utils | libgnome2-0
+  | konqueror keychain libpam-ssh monkeysphere ssh-askpass python3-doc
+  python3-tk python3-venv python3.8-venv python3.8-doc
+The following NEW packages will be installed:
+  binfmt-support ca-certificates-mono cli-common comerr-dev file git git-man
+  krb5-locales krb5-multidev less libblkid-dev libbrotli1 libbsd0 libcbor0.6
+  libcurl3-gnutls libedit2 libelf1 liberror-perl libexpat1 libffi-dev
+  libfido2-1 libgio-cil libgio2.0-cil-dev libglib2.0-0 libglib2.0-bin
+  libglib2.0-cil libglib2.0-data libglib2.0-dev libglib2.0-dev-bin
+  libgssapi-krb5-2 libgssrpc4 libicu66 libk5crypto3 libkadm5clnt-mit11
+  libkadm5srv-mit11 libkdb5-9 libkeyutils1 libkrb5-3 libkrb5-dev
+  libkrb5support0 libmagic-mgc libmagic1 libmono-btls-interface4.0-cil
+  libmono-corlib4.5-cil libmono-i18n-west4.0-cil libmono-i18n4.0-cil
+  libmono-security4.0-cil libmono-system-configuration4.0-cil
+  libmono-system-core4.0-cil libmono-system-numerics4.0-cil
+  libmono-system-security4.0-cil libmono-system-xml4.0-cil
+  libmono-system4.0-cil libmount-dev libmpdec2 libnghttp2-14 libnorm-dev
+  libnorm1 libpcre16-3 libpcre2-16-0 libpcre2-32-0 libpcre2-dev
+  libpcre2-posix2 libpcre3-dev libpcre32-3 libpcrecpp0v5 libpgm-5.2-0
+  libpgm-dev libpipeline1 libpsl5 libpython3-stdlib libpython3.8-minimal
+  libpython3.8-stdlib librtmp1 libselinux1-dev libsepol1-dev libsodium-dev
+  libsodium23 libssh-4 libx11-6 libx11-data libxau6 libxcb1 libxdmcp6 libxext6
+  libxml2 libxmuu1 libzmq3-dev libzmq5 mime-support mono-4.0-gac mono-gac
+  mono-runtime mono-runtime-common mono-runtime-sgen openssh-client pkg-config
+  publicsuffix python3 python3-distutils python3-lib2to3 python3-minimal
+  python3.8 python3.8-minimal shared-mime-info tzdata uuid-dev xauth
+  xdg-user-dirs zlib1g-dev
+The following packages will be upgraded:
+  libcom-err2 libpcre3 libsepol1
+3 upgraded, 110 newly installed, 0 to remove and 31 not upgraded.
+Need to get 40.2 MB of archives.
+After this operation, 188 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libpython3.8-minimal amd64 3.8.10-0ubuntu1~20.04.4 [717 kB]
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libexpat1 amd64 2.2.9-1ubuntu0.4 [74.4 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 python3.8-minimal amd64 3.8.10-0ubuntu1~20.04.4 [1899 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal/main amd64 python3-minimal amd64 3.8.2-0ubuntu2 [23.6 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal/main amd64 mime-support all 3.64ubuntu1 [30.6 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 libmpdec2 amd64 2.4.2-3 [81.1 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libpython3.8-stdlib amd64 3.8.10-0ubuntu1~20.04.4 [1675 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 python3.8 amd64 3.8.10-0ubuntu1~20.04.4 [387 kB]
+Get:9 http://archive.ubuntu.com/ubuntu focal/main amd64 libpython3-stdlib amd64 3.8.2-0ubuntu2 [7068 B]
+Get:10 http://archive.ubuntu.com/ubuntu focal/main amd64 python3 amd64 3.8.2-0ubuntu2 [47.6 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkrb5support0 amd64 1.17-6ubuntu4.1 [30.9 kB]
+Get:12 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libk5crypto3 amd64 1.17-6ubuntu4.1 [79.9 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkeyutils1 amd64 1.6-6ubuntu1.1 [10.3 kB]
+Get:14 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcom-err2 amd64 1.45.5-2ubuntu1.1 [9548 B]
+Get:15 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkrb5-3 amd64 1.17-6ubuntu4.1 [330 kB]
+Get:16 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libgssapi-krb5-2 amd64 1.17-6ubuntu4.1 [121 kB]
+Get:17 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 tzdata all 2022a-0ubuntu0.20.04 [294 kB]
+Get:18 http://archive.ubuntu.com/ubuntu focal/universe amd64 mono-runtime-sgen amd64 6.8.0.105+dfsg-2 [1663 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal/universe amd64 mono-runtime amd64 6.8.0.105+dfsg-2 [14.8 kB]
+Get:20 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-corlib4.5-cil all 6.8.0.105+dfsg-2 [1256 kB]
+Get:21 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-system-core4.0-cil all 6.8.0.105+dfsg-2 [302 kB]
+Get:22 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-system-numerics4.0-cil all 6.8.0.105+dfsg-2 [48.6 kB]
+Get:23 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-system-xml4.0-cil all 6.8.0.105+dfsg-2 [816 kB]
+Get:24 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-system-security4.0-cil all 6.8.0.105+dfsg-2 [114 kB]
+Get:25 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-system-configuration4.0-cil all 6.8.0.105+dfsg-2 [54.9 kB]
+Get:26 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-system4.0-cil all 6.8.0.105+dfsg-2 [802 kB]
+Get:27 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-security4.0-cil all 6.8.0.105+dfsg-2 [95.3 kB]
+Get:28 http://archive.ubuntu.com/ubuntu focal/universe amd64 mono-4.0-gac all 6.8.0.105+dfsg-2 [153 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal/universe amd64 mono-gac all 6.8.0.105+dfsg-2 [18.7 kB]
+Get:30 http://archive.ubuntu.com/ubuntu focal/universe amd64 mono-runtime-common amd64 6.8.0.105+dfsg-2 [1154 kB]
+Get:31 http://archive.ubuntu.com/ubuntu focal/universe amd64 ca-certificates-mono all 6.8.0.105+dfsg-2 [18.0 kB]
+Get:32 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libpcre3 amd64 2:8.39-12ubuntu0.1 [232 kB]
+Get:33 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libsepol1 amd64 3.0-1ubuntu0.1 [252 kB]
+Get:34 http://archive.ubuntu.com/ubuntu focal/main amd64 libmagic-mgc amd64 1:5.38-4 [218 kB]
+Get:35 http://archive.ubuntu.com/ubuntu focal/main amd64 libmagic1 amd64 1:5.38-4 [75.9 kB]
+Get:36 http://archive.ubuntu.com/ubuntu focal/main amd64 file amd64 1:5.38-4 [23.3 kB]
+Get:37 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 less amd64 551-1ubuntu0.1 [123 kB]
+Get:38 http://archive.ubuntu.com/ubuntu focal/main amd64 libbsd0 amd64 0.10.0-1 [45.4 kB]
+Get:39 http://archive.ubuntu.com/ubuntu focal/main amd64 libelf1 amd64 0.176-1.1build1 [44.0 kB]
+Get:40 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libglib2.0-0 amd64 2.64.6-1~ubuntu20.04.4 [1287 kB]
+Get:41 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libglib2.0-data all 2.64.6-1~ubuntu20.04.4 [6052 B]
+Get:42 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libicu66 amd64 66.1-2ubuntu2.1 [8515 kB]
+Get:43 http://archive.ubuntu.com/ubuntu focal/main amd64 libsodium23 amd64 1.0.18-1 [150 kB]
+Get:44 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libxml2 amd64 2.9.10+dfsg-5ubuntu0.20.04.3 [640 kB]
+Get:45 http://archive.ubuntu.com/ubuntu focal/main amd64 shared-mime-info amd64 1.15-1 [430 kB]
+Get:46 http://archive.ubuntu.com/ubuntu focal/main amd64 xdg-user-dirs amd64 0.17-2ubuntu1 [48.3 kB]
+Get:47 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 krb5-locales all 1.17-6ubuntu4.1 [11.4 kB]
+Get:48 http://archive.ubuntu.com/ubuntu focal/main amd64 libcbor0.6 amd64 0.6.0-0ubuntu1 [21.1 kB]
+Get:49 http://archive.ubuntu.com/ubuntu focal/main amd64 libedit2 amd64 3.1-20191231-1 [87.0 kB]
+Get:50 http://archive.ubuntu.com/ubuntu focal/main amd64 libfido2-1 amd64 1.3.1-1ubuntu2 [47.9 kB]
+Get:51 http://archive.ubuntu.com/ubuntu focal/main amd64 libpipeline1 amd64 1.5.2-2build1 [27.7 kB]
+Get:52 http://archive.ubuntu.com/ubuntu focal/main amd64 libpsl5 amd64 0.21.0-1ubuntu1 [51.5 kB]
+Get:53 http://archive.ubuntu.com/ubuntu focal/main amd64 libxau6 amd64 1:1.0.9-0ubuntu1 [7488 B]
+Get:54 http://archive.ubuntu.com/ubuntu focal/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu1 [10.6 kB]
+Get:55 http://archive.ubuntu.com/ubuntu focal/main amd64 libxcb1 amd64 1.14-2 [44.7 kB]
+Get:56 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libx11-data all 2:1.6.9-2ubuntu1.2 [113 kB]
+Get:57 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libx11-6 amd64 2:1.6.9-2ubuntu1.2 [575 kB]
+Get:58 http://archive.ubuntu.com/ubuntu focal/main amd64 libxext6 amd64 2:1.3.4-0ubuntu1 [29.1 kB]
+Get:59 http://archive.ubuntu.com/ubuntu focal/main amd64 libxmuu1 amd64 2:1.1.3-0ubuntu1 [9728 B]
+Get:60 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 openssh-client amd64 1:8.2p1-4ubuntu0.5 [671 kB]
+Get:61 http://archive.ubuntu.com/ubuntu focal/main amd64 publicsuffix all 20200303.0012-1 [111 kB]
+Get:62 http://archive.ubuntu.com/ubuntu focal/main amd64 xauth amd64 1:1.1-0ubuntu1 [25.0 kB]
+Get:63 http://archive.ubuntu.com/ubuntu focal/universe amd64 binfmt-support amd64 2.2.0-2 [58.2 kB]
+Get:64 http://archive.ubuntu.com/ubuntu focal/universe amd64 cli-common all 0.10 [171 kB]
+Get:65 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libbrotli1 amd64 1.0.7-6ubuntu0.1 [267 kB]
+Get:66 http://archive.ubuntu.com/ubuntu focal/main amd64 libnghttp2-14 amd64 1.40.0-1build1 [78.7 kB]
+Get:67 http://archive.ubuntu.com/ubuntu focal/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2build1 [54.9 kB]
+Get:68 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libssh-4 amd64 0.9.3-2ubuntu2.2 [170 kB]
+Get:69 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcurl3-gnutls amd64 7.68.0-1ubuntu2.11 [233 kB]
+Get:70 http://archive.ubuntu.com/ubuntu focal/main amd64 liberror-perl all 0.17029-1 [26.5 kB]
+Get:71 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 git-man all 1:2.25.1-1ubuntu3.4 [885 kB]
+Get:72 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 git amd64 1:2.25.1-1ubuntu3.4 [4560 kB]
+Get:73 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libgssrpc4 amd64 1.17-6ubuntu4.1 [55.4 kB]
+Get:74 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkdb5-9 amd64 1.17-6ubuntu4.1 [37.3 kB]
+Get:75 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkadm5srv-mit11 amd64 1.17-6ubuntu4.1 [49.5 kB]
+Get:76 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkadm5clnt-mit11 amd64 1.17-6ubuntu4.1 [37.6 kB]
+Get:77 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 comerr-dev amd64 2.1-1.45.5-2ubuntu1.1 [39.9 kB]
+Get:78 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 krb5-multidev amd64 1.17-6ubuntu4.1 [120 kB]
+Get:79 http://archive.ubuntu.com/ubuntu focal/universe amd64 libglib2.0-cil amd64 2.12.40-3 [43.7 kB]
+Get:80 http://archive.ubuntu.com/ubuntu focal/universe amd64 libgio-cil all 2.22.3-3 [51.9 kB]
+Get:81 http://archive.ubuntu.com/ubuntu focal/universe amd64 libgio2.0-cil-dev all 2.22.3-3 [20.6 kB]
+Get:82 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libglib2.0-bin amd64 2.64.6-1~ubuntu20.04.4 [72.6 kB]
+Get:83 http://archive.ubuntu.com/ubuntu focal/main amd64 libffi-dev amd64 3.3-4 [57.0 kB]
+Get:84 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 python3-lib2to3 all 3.8.10-0ubuntu1~20.04 [76.3 kB]
+Get:85 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 python3-distutils all 3.8.10-0ubuntu1~20.04 [141 kB]
+Get:86 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libglib2.0-dev-bin amd64 2.64.6-1~ubuntu20.04.4 [109 kB]
+Get:87 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 uuid-dev amd64 2.34-0.1ubuntu9.3 [33.6 kB]
+Get:88 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libblkid-dev amd64 2.34-0.1ubuntu9.3 [167 kB]
+Get:89 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libmount-dev amd64 2.34-0.1ubuntu9.3 [176 kB]
+Get:90 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libpcre16-3 amd64 2:8.39-12ubuntu0.1 [150 kB]
+Get:91 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libpcre32-3 amd64 2:8.39-12ubuntu0.1 [140 kB]
+Get:92 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libpcrecpp0v5 amd64 2:8.39-12ubuntu0.1 [15.5 kB]
+Get:93 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libpcre3-dev amd64 2:8.39-12ubuntu0.1 [540 kB]
+Get:94 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libsepol1-dev amd64 3.0-1ubuntu0.1 [325 kB]
+Get:95 http://archive.ubuntu.com/ubuntu focal/main amd64 libpcre2-16-0 amd64 10.34-7 [181 kB]
+Get:96 http://archive.ubuntu.com/ubuntu focal/main amd64 libpcre2-32-0 amd64 10.34-7 [169 kB]
+Get:97 http://archive.ubuntu.com/ubuntu focal/main amd64 libpcre2-posix2 amd64 10.34-7 [5992 B]
+Get:98 http://archive.ubuntu.com/ubuntu focal/main amd64 libpcre2-dev amd64 10.34-7 [670 kB]
+Get:99 http://archive.ubuntu.com/ubuntu focal/main amd64 libselinux1-dev amd64 3.0-1build2 [151 kB]
+Get:100 http://archive.ubuntu.com/ubuntu focal/main amd64 pkg-config amd64 0.29.1-0ubuntu4 [45.5 kB]
+Get:101 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 zlib1g-dev amd64 1:1.2.11.dfsg-2ubuntu1.3 [155 kB]
+Get:102 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libglib2.0-dev amd64 2.64.6-1~ubuntu20.04.4 [1506 kB]
+Get:103 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-btls-interface4.0-cil amd64 6.8.0.105+dfsg-2 [26.7 kB]
+Get:104 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-i18n4.0-cil all 6.8.0.105+dfsg-2 [22.9 kB]
+Get:105 http://archive.ubuntu.com/ubuntu focal/universe amd64 libmono-i18n-west4.0-cil all 6.8.0.105+dfsg-2 [25.9 kB]
+Get:106 http://archive.ubuntu.com/ubuntu focal/universe amd64 libnorm1 amd64 1.5.8+dfsg2-2build1 [290 kB]
+Get:107 http://archive.ubuntu.com/ubuntu focal/universe amd64 libnorm-dev amd64 1.5.8+dfsg2-2build1 [463 kB]
+Get:108 http://archive.ubuntu.com/ubuntu focal/universe amd64 libpgm-5.2-0 amd64 5.2.122~dfsg-3ubuntu1 [158 kB]
+Get:109 http://archive.ubuntu.com/ubuntu focal/universe amd64 libpgm-dev amd64 5.2.122~dfsg-3ubuntu1 [189 kB]
+Get:110 http://archive.ubuntu.com/ubuntu focal/main amd64 libsodium-dev amd64 1.0.18-1 [169 kB]
+Get:111 http://archive.ubuntu.com/ubuntu focal/universe amd64 libzmq5 amd64 4.3.2-2ubuntu1 [242 kB]
+Get:112 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkrb5-dev amd64 1.17-6ubuntu4.1 [11.7 kB]
+Get:113 http://archive.ubuntu.com/ubuntu focal/universe amd64 libzmq3-dev amd64 4.3.2-2ubuntu1 [455 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 40.2 MB in 5s (8362 kB/s)
+Selecting previously unselected package libpython3.8-minimal:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 12829 files and directories currently installed.)
+Preparing to unpack .../libpython3.8-minimal_3.8.10-0ubuntu1~20.04.4_amd64.deb ...
+Unpacking libpython3.8-minimal:amd64 (3.8.10-0ubuntu1~20.04.4) ...
+Selecting previously unselected package libexpat1:amd64.
+Preparing to unpack .../libexpat1_2.2.9-1ubuntu0.4_amd64.deb ...
+Unpacking libexpat1:amd64 (2.2.9-1ubuntu0.4) ...
+Selecting previously unselected package python3.8-minimal.
+Preparing to unpack .../python3.8-minimal_3.8.10-0ubuntu1~20.04.4_amd64.deb ...
+Unpacking python3.8-minimal (3.8.10-0ubuntu1~20.04.4) ...
+Setting up libpython3.8-minimal:amd64 (3.8.10-0ubuntu1~20.04.4) ...
+Setting up libexpat1:amd64 (2.2.9-1ubuntu0.4) ...
+Setting up python3.8-minimal (3.8.10-0ubuntu1~20.04.4) ...
+Selecting previously unselected package python3-minimal.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 13120 files and directories currently installed.)
+Preparing to unpack .../0-python3-minimal_3.8.2-0ubuntu2_amd64.deb ...
+Unpacking python3-minimal (3.8.2-0ubuntu2) ...
+Selecting previously unselected package mime-support.
+Preparing to unpack .../1-mime-support_3.64ubuntu1_all.deb ...
+Unpacking mime-support (3.64ubuntu1) ...
+Selecting previously unselected package libmpdec2:amd64.
+Preparing to unpack .../2-libmpdec2_2.4.2-3_amd64.deb ...
+Unpacking libmpdec2:amd64 (2.4.2-3) ...
+Selecting previously unselected package libpython3.8-stdlib:amd64.
+Preparing to unpack .../3-libpython3.8-stdlib_3.8.10-0ubuntu1~20.04.4_amd64.deb ...
+Unpacking libpython3.8-stdlib:amd64 (3.8.10-0ubuntu1~20.04.4) ...
+Selecting previously unselected package python3.8.
+Preparing to unpack .../4-python3.8_3.8.10-0ubuntu1~20.04.4_amd64.deb ...
+Unpacking python3.8 (3.8.10-0ubuntu1~20.04.4) ...
+Selecting previously unselected package libpython3-stdlib:amd64.
+Preparing to unpack .../5-libpython3-stdlib_3.8.2-0ubuntu2_amd64.deb ...
+Unpacking libpython3-stdlib:amd64 (3.8.2-0ubuntu2) ...
+Setting up python3-minimal (3.8.2-0ubuntu2) ...
+Selecting previously unselected package python3.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 13522 files and directories currently installed.)
+Preparing to unpack .../00-python3_3.8.2-0ubuntu2_amd64.deb ...
+Unpacking python3 (3.8.2-0ubuntu2) ...
+Selecting previously unselected package libkrb5support0:amd64.
+Preparing to unpack .../01-libkrb5support0_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking libkrb5support0:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package libk5crypto3:amd64.
+Preparing to unpack .../02-libk5crypto3_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking libk5crypto3:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package libkeyutils1:amd64.
+Preparing to unpack .../03-libkeyutils1_1.6-6ubuntu1.1_amd64.deb ...
+Unpacking libkeyutils1:amd64 (1.6-6ubuntu1.1) ...
+Preparing to unpack .../04-libcom-err2_1.45.5-2ubuntu1.1_amd64.deb ...
+Unpacking libcom-err2:amd64 (1.45.5-2ubuntu1.1) over (1.45.5-2ubuntu1) ...
+Selecting previously unselected package libkrb5-3:amd64.
+Preparing to unpack .../05-libkrb5-3_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking libkrb5-3:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package libgssapi-krb5-2:amd64.
+Preparing to unpack .../06-libgssapi-krb5-2_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking libgssapi-krb5-2:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package tzdata.
+Preparing to unpack .../07-tzdata_2022a-0ubuntu0.20.04_all.deb ...
+Unpacking tzdata (2022a-0ubuntu0.20.04) ...
+Selecting previously unselected package mono-runtime-sgen.
+Preparing to unpack .../08-mono-runtime-sgen_6.8.0.105+dfsg-2_amd64.deb ...
+Unpacking mono-runtime-sgen (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package mono-runtime.
+Preparing to unpack .../09-mono-runtime_6.8.0.105+dfsg-2_amd64.deb ...
+Unpacking mono-runtime (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-corlib4.5-cil.
+Preparing to unpack .../10-libmono-corlib4.5-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-corlib4.5-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-system-core4.0-cil.
+Preparing to unpack .../11-libmono-system-core4.0-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-system-core4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-system-numerics4.0-cil.
+Preparing to unpack .../12-libmono-system-numerics4.0-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-system-numerics4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-system-xml4.0-cil.
+Preparing to unpack .../13-libmono-system-xml4.0-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-system-xml4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-system-security4.0-cil.
+Preparing to unpack .../14-libmono-system-security4.0-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-system-security4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-system-configuration4.0-cil.
+Preparing to unpack .../15-libmono-system-configuration4.0-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-system-configuration4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-system4.0-cil.
+Preparing to unpack .../16-libmono-system4.0-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-system4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-security4.0-cil.
+Preparing to unpack .../17-libmono-security4.0-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-security4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package mono-4.0-gac.
+Preparing to unpack .../18-mono-4.0-gac_6.8.0.105+dfsg-2_all.deb ...
+Unpacking mono-4.0-gac (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package mono-gac.
+Preparing to unpack .../19-mono-gac_6.8.0.105+dfsg-2_all.deb ...
+Unpacking mono-gac (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package mono-runtime-common.
+Preparing to unpack .../20-mono-runtime-common_6.8.0.105+dfsg-2_amd64.deb ...
+Unpacking mono-runtime-common (6.8.0.105+dfsg-2) ...
+Setting up libcom-err2:amd64 (1.45.5-2ubuntu1.1) ...
+Setting up libkrb5support0:amd64 (1.17-6ubuntu4.1) ...
+Setting up libk5crypto3:amd64 (1.17-6ubuntu4.1) ...
+Setting up libkeyutils1:amd64 (1.6-6ubuntu1.1) ...
+Setting up libkrb5-3:amd64 (1.17-6ubuntu4.1) ...
+Setting up libgssapi-krb5-2:amd64 (1.17-6ubuntu4.1) ...
+Setting up tzdata (2022a-0ubuntu0.20.04) ...
+
+Current default time zone: 'Etc/UTC'
+Local time is now:      Mon Jun 20 01:45:41 UTC 2022.
+Universal Time is now:  Mon Jun 20 01:45:41 UTC 2022.
+Run 'dpkg-reconfigure tzdata' if you wish to change it.
+
+Setting up libmono-security4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up mono-runtime-sgen (6.8.0.105+dfsg-2) ...
+Setting up mono-runtime (6.8.0.105+dfsg-2) ...
+update-alternatives: using /usr/bin/mono to provide /usr/bin/cli (cli) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/cli.1.gz because associated file /usr/share/man/man1/mono.1.gz (of link group cli) doesn't exist
+Setting up libmono-corlib4.5-cil (6.8.0.105+dfsg-2) ...
+Setting up libmono-system-numerics4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up libmono-system-configuration4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up libmono-system-xml4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up libmono-system-core4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up libmono-system4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up libmono-system-security4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up mono-4.0-gac (6.8.0.105+dfsg-2) ...
+Setting up mono-gac (6.8.0.105+dfsg-2) ...
+update-alternatives: using /usr/bin/gacutil to provide /usr/bin/cli-gacutil (global-assembly-cache-tool) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/cli-gacutil.1.gz because associated file /usr/share/man/man1/gacutil.1.gz (of link group global-assembly-cache-tool) doesn't exist
+Setting up mono-runtime-common (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package ca-certificates-mono.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15641 files and directories currently installed.)
+Preparing to unpack .../ca-certificates-mono_6.8.0.105+dfsg-2_all.deb ...
+Unpacking ca-certificates-mono (6.8.0.105+dfsg-2) ...
+Preparing to unpack .../libpcre3_2%3a8.39-12ubuntu0.1_amd64.deb ...
+Unpacking libpcre3:amd64 (2:8.39-12ubuntu0.1) over (2:8.39-12build1) ...
+Setting up libpcre3:amd64 (2:8.39-12ubuntu0.1) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15647 files and directories currently installed.)
+Preparing to unpack .../libsepol1_3.0-1ubuntu0.1_amd64.deb ...
+Unpacking libsepol1:amd64 (3.0-1ubuntu0.1) over (3.0-1) ...
+Setting up libsepol1:amd64 (3.0-1ubuntu0.1) ...
+Selecting previously unselected package libmagic-mgc.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15647 files and directories currently installed.)
+Preparing to unpack .../00-libmagic-mgc_1%3a5.38-4_amd64.deb ...
+Unpacking libmagic-mgc (1:5.38-4) ...
+Selecting previously unselected package libmagic1:amd64.
+Preparing to unpack .../01-libmagic1_1%3a5.38-4_amd64.deb ...
+Unpacking libmagic1:amd64 (1:5.38-4) ...
+Selecting previously unselected package file.
+Preparing to unpack .../02-file_1%3a5.38-4_amd64.deb ...
+Unpacking file (1:5.38-4) ...
+Selecting previously unselected package less.
+Preparing to unpack .../03-less_551-1ubuntu0.1_amd64.deb ...
+Unpacking less (551-1ubuntu0.1) ...
+Selecting previously unselected package libbsd0:amd64.
+Preparing to unpack .../04-libbsd0_0.10.0-1_amd64.deb ...
+Unpacking libbsd0:amd64 (0.10.0-1) ...
+Selecting previously unselected package libelf1:amd64.
+Preparing to unpack .../05-libelf1_0.176-1.1build1_amd64.deb ...
+Unpacking libelf1:amd64 (0.176-1.1build1) ...
+Selecting previously unselected package libglib2.0-0:amd64.
+Preparing to unpack .../06-libglib2.0-0_2.64.6-1~ubuntu20.04.4_amd64.deb ...
+Unpacking libglib2.0-0:amd64 (2.64.6-1~ubuntu20.04.4) ...
+Selecting previously unselected package libglib2.0-data.
+Preparing to unpack .../07-libglib2.0-data_2.64.6-1~ubuntu20.04.4_all.deb ...
+Unpacking libglib2.0-data (2.64.6-1~ubuntu20.04.4) ...
+Selecting previously unselected package libicu66:amd64.
+Preparing to unpack .../08-libicu66_66.1-2ubuntu2.1_amd64.deb ...
+Unpacking libicu66:amd64 (66.1-2ubuntu2.1) ...
+Selecting previously unselected package libsodium23:amd64.
+Preparing to unpack .../09-libsodium23_1.0.18-1_amd64.deb ...
+Unpacking libsodium23:amd64 (1.0.18-1) ...
+Selecting previously unselected package libxml2:amd64.
+Preparing to unpack .../10-libxml2_2.9.10+dfsg-5ubuntu0.20.04.3_amd64.deb ...
+Unpacking libxml2:amd64 (2.9.10+dfsg-5ubuntu0.20.04.3) ...
+Selecting previously unselected package shared-mime-info.
+Preparing to unpack .../11-shared-mime-info_1.15-1_amd64.deb ...
+Unpacking shared-mime-info (1.15-1) ...
+Selecting previously unselected package xdg-user-dirs.
+Preparing to unpack .../12-xdg-user-dirs_0.17-2ubuntu1_amd64.deb ...
+Unpacking xdg-user-dirs (0.17-2ubuntu1) ...
+Selecting previously unselected package krb5-locales.
+Preparing to unpack .../13-krb5-locales_1.17-6ubuntu4.1_all.deb ...
+Unpacking krb5-locales (1.17-6ubuntu4.1) ...
+Selecting previously unselected package libcbor0.6:amd64.
+Preparing to unpack .../14-libcbor0.6_0.6.0-0ubuntu1_amd64.deb ...
+Unpacking libcbor0.6:amd64 (0.6.0-0ubuntu1) ...
+Selecting previously unselected package libedit2:amd64.
+Preparing to unpack .../15-libedit2_3.1-20191231-1_amd64.deb ...
+Unpacking libedit2:amd64 (3.1-20191231-1) ...
+Selecting previously unselected package libfido2-1:amd64.
+Preparing to unpack .../16-libfido2-1_1.3.1-1ubuntu2_amd64.deb ...
+Unpacking libfido2-1:amd64 (1.3.1-1ubuntu2) ...
+Selecting previously unselected package libpipeline1:amd64.
+Preparing to unpack .../17-libpipeline1_1.5.2-2build1_amd64.deb ...
+Unpacking libpipeline1:amd64 (1.5.2-2build1) ...
+Selecting previously unselected package libpsl5:amd64.
+Preparing to unpack .../18-libpsl5_0.21.0-1ubuntu1_amd64.deb ...
+Unpacking libpsl5:amd64 (0.21.0-1ubuntu1) ...
+Selecting previously unselected package libxau6:amd64.
+Preparing to unpack .../19-libxau6_1%3a1.0.9-0ubuntu1_amd64.deb ...
+Unpacking libxau6:amd64 (1:1.0.9-0ubuntu1) ...
+Selecting previously unselected package libxdmcp6:amd64.
+Preparing to unpack .../20-libxdmcp6_1%3a1.1.3-0ubuntu1_amd64.deb ...
+Unpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu1) ...
+Selecting previously unselected package libxcb1:amd64.
+Preparing to unpack .../21-libxcb1_1.14-2_amd64.deb ...
+Unpacking libxcb1:amd64 (1.14-2) ...
+Selecting previously unselected package libx11-data.
+Preparing to unpack .../22-libx11-data_2%3a1.6.9-2ubuntu1.2_all.deb ...
+Unpacking libx11-data (2:1.6.9-2ubuntu1.2) ...
+Selecting previously unselected package libx11-6:amd64.
+Preparing to unpack .../23-libx11-6_2%3a1.6.9-2ubuntu1.2_amd64.deb ...
+Unpacking libx11-6:amd64 (2:1.6.9-2ubuntu1.2) ...
+Selecting previously unselected package libxext6:amd64.
+Preparing to unpack .../24-libxext6_2%3a1.3.4-0ubuntu1_amd64.deb ...
+Unpacking libxext6:amd64 (2:1.3.4-0ubuntu1) ...
+Selecting previously unselected package libxmuu1:amd64.
+Preparing to unpack .../25-libxmuu1_2%3a1.1.3-0ubuntu1_amd64.deb ...
+Unpacking libxmuu1:amd64 (2:1.1.3-0ubuntu1) ...
+Selecting previously unselected package openssh-client.
+Preparing to unpack .../26-openssh-client_1%3a8.2p1-4ubuntu0.5_amd64.deb ...
+Unpacking openssh-client (1:8.2p1-4ubuntu0.5) ...
+Selecting previously unselected package publicsuffix.
+Preparing to unpack .../27-publicsuffix_20200303.0012-1_all.deb ...
+Unpacking publicsuffix (20200303.0012-1) ...
+Selecting previously unselected package xauth.
+Preparing to unpack .../28-xauth_1%3a1.1-0ubuntu1_amd64.deb ...
+Unpacking xauth (1:1.1-0ubuntu1) ...
+Selecting previously unselected package binfmt-support.
+Preparing to unpack .../29-binfmt-support_2.2.0-2_amd64.deb ...
+Unpacking binfmt-support (2.2.0-2) ...
+Selecting previously unselected package cli-common.
+Preparing to unpack .../30-cli-common_0.10_all.deb ...
+Unpacking cli-common (0.10) ...
+Selecting previously unselected package libbrotli1:amd64.
+Preparing to unpack .../31-libbrotli1_1.0.7-6ubuntu0.1_amd64.deb ...
+Unpacking libbrotli1:amd64 (1.0.7-6ubuntu0.1) ...
+Selecting previously unselected package libnghttp2-14:amd64.
+Preparing to unpack .../32-libnghttp2-14_1.40.0-1build1_amd64.deb ...
+Unpacking libnghttp2-14:amd64 (1.40.0-1build1) ...
+Selecting previously unselected package librtmp1:amd64.
+Preparing to unpack .../33-librtmp1_2.4+20151223.gitfa8646d.1-2build1_amd64.deb ...
+Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2build1) ...
+Selecting previously unselected package libssh-4:amd64.
+Preparing to unpack .../34-libssh-4_0.9.3-2ubuntu2.2_amd64.deb ...
+Unpacking libssh-4:amd64 (0.9.3-2ubuntu2.2) ...
+Selecting previously unselected package libcurl3-gnutls:amd64.
+Preparing to unpack .../35-libcurl3-gnutls_7.68.0-1ubuntu2.11_amd64.deb ...
+Unpacking libcurl3-gnutls:amd64 (7.68.0-1ubuntu2.11) ...
+Selecting previously unselected package liberror-perl.
+Preparing to unpack .../36-liberror-perl_0.17029-1_all.deb ...
+Unpacking liberror-perl (0.17029-1) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../37-git-man_1%3a2.25.1-1ubuntu3.4_all.deb ...
+Unpacking git-man (1:2.25.1-1ubuntu3.4) ...
+Selecting previously unselected package git.
+Preparing to unpack .../38-git_1%3a2.25.1-1ubuntu3.4_amd64.deb ...
+Unpacking git (1:2.25.1-1ubuntu3.4) ...
+Selecting previously unselected package libgssrpc4:amd64.
+Preparing to unpack .../39-libgssrpc4_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking libgssrpc4:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package libkdb5-9:amd64.
+Preparing to unpack .../40-libkdb5-9_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking libkdb5-9:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package libkadm5srv-mit11:amd64.
+Preparing to unpack .../41-libkadm5srv-mit11_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking libkadm5srv-mit11:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package libkadm5clnt-mit11:amd64.
+Preparing to unpack .../42-libkadm5clnt-mit11_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking libkadm5clnt-mit11:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package comerr-dev:amd64.
+Preparing to unpack .../43-comerr-dev_2.1-1.45.5-2ubuntu1.1_amd64.deb ...
+Unpacking comerr-dev:amd64 (2.1-1.45.5-2ubuntu1.1) ...
+Selecting previously unselected package krb5-multidev:amd64.
+Preparing to unpack .../44-krb5-multidev_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking krb5-multidev:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package libglib2.0-cil.
+Preparing to unpack .../45-libglib2.0-cil_2.12.40-3_amd64.deb ...
+Unpacking libglib2.0-cil (2.12.40-3) ...
+Selecting previously unselected package libgio-cil.
+Preparing to unpack .../46-libgio-cil_2.22.3-3_all.deb ...
+Unpacking libgio-cil (2.22.3-3) ...
+Selecting previously unselected package libgio2.0-cil-dev.
+Preparing to unpack .../47-libgio2.0-cil-dev_2.22.3-3_all.deb ...
+Unpacking libgio2.0-cil-dev (2.22.3-3) ...
+Selecting previously unselected package libglib2.0-bin.
+Preparing to unpack .../48-libglib2.0-bin_2.64.6-1~ubuntu20.04.4_amd64.deb ...
+Unpacking libglib2.0-bin (2.64.6-1~ubuntu20.04.4) ...
+Selecting previously unselected package libffi-dev:amd64.
+Preparing to unpack .../49-libffi-dev_3.3-4_amd64.deb ...
+Unpacking libffi-dev:amd64 (3.3-4) ...
+Selecting previously unselected package python3-lib2to3.
+Preparing to unpack .../50-python3-lib2to3_3.8.10-0ubuntu1~20.04_all.deb ...
+Unpacking python3-lib2to3 (3.8.10-0ubuntu1~20.04) ...
+Selecting previously unselected package python3-distutils.
+Preparing to unpack .../51-python3-distutils_3.8.10-0ubuntu1~20.04_all.deb ...
+Unpacking python3-distutils (3.8.10-0ubuntu1~20.04) ...
+Selecting previously unselected package libglib2.0-dev-bin.
+Preparing to unpack .../52-libglib2.0-dev-bin_2.64.6-1~ubuntu20.04.4_amd64.deb ...
+Unpacking libglib2.0-dev-bin (2.64.6-1~ubuntu20.04.4) ...
+Selecting previously unselected package uuid-dev:amd64.
+Preparing to unpack .../53-uuid-dev_2.34-0.1ubuntu9.3_amd64.deb ...
+Unpacking uuid-dev:amd64 (2.34-0.1ubuntu9.3) ...
+Selecting previously unselected package libblkid-dev:amd64.
+Preparing to unpack .../54-libblkid-dev_2.34-0.1ubuntu9.3_amd64.deb ...
+Unpacking libblkid-dev:amd64 (2.34-0.1ubuntu9.3) ...
+Selecting previously unselected package libmount-dev:amd64.
+Preparing to unpack .../55-libmount-dev_2.34-0.1ubuntu9.3_amd64.deb ...
+Unpacking libmount-dev:amd64 (2.34-0.1ubuntu9.3) ...
+Selecting previously unselected package libpcre16-3:amd64.
+Preparing to unpack .../56-libpcre16-3_2%3a8.39-12ubuntu0.1_amd64.deb ...
+Unpacking libpcre16-3:amd64 (2:8.39-12ubuntu0.1) ...
+Selecting previously unselected package libpcre32-3:amd64.
+Preparing to unpack .../57-libpcre32-3_2%3a8.39-12ubuntu0.1_amd64.deb ...
+Unpacking libpcre32-3:amd64 (2:8.39-12ubuntu0.1) ...
+Selecting previously unselected package libpcrecpp0v5:amd64.
+Preparing to unpack .../58-libpcrecpp0v5_2%3a8.39-12ubuntu0.1_amd64.deb ...
+Unpacking libpcrecpp0v5:amd64 (2:8.39-12ubuntu0.1) ...
+Selecting previously unselected package libpcre3-dev:amd64.
+Preparing to unpack .../59-libpcre3-dev_2%3a8.39-12ubuntu0.1_amd64.deb ...
+Unpacking libpcre3-dev:amd64 (2:8.39-12ubuntu0.1) ...
+Selecting previously unselected package libsepol1-dev:amd64.
+Preparing to unpack .../60-libsepol1-dev_3.0-1ubuntu0.1_amd64.deb ...
+Unpacking libsepol1-dev:amd64 (3.0-1ubuntu0.1) ...
+Selecting previously unselected package libpcre2-16-0:amd64.
+Preparing to unpack .../61-libpcre2-16-0_10.34-7_amd64.deb ...
+Unpacking libpcre2-16-0:amd64 (10.34-7) ...
+Selecting previously unselected package libpcre2-32-0:amd64.
+Preparing to unpack .../62-libpcre2-32-0_10.34-7_amd64.deb ...
+Unpacking libpcre2-32-0:amd64 (10.34-7) ...
+Selecting previously unselected package libpcre2-posix2:amd64.
+Preparing to unpack .../63-libpcre2-posix2_10.34-7_amd64.deb ...
+Unpacking libpcre2-posix2:amd64 (10.34-7) ...
+Selecting previously unselected package libpcre2-dev:amd64.
+Preparing to unpack .../64-libpcre2-dev_10.34-7_amd64.deb ...
+Unpacking libpcre2-dev:amd64 (10.34-7) ...
+Selecting previously unselected package libselinux1-dev:amd64.
+Preparing to unpack .../65-libselinux1-dev_3.0-1build2_amd64.deb ...
+Unpacking libselinux1-dev:amd64 (3.0-1build2) ...
+Selecting previously unselected package pkg-config.
+Preparing to unpack .../66-pkg-config_0.29.1-0ubuntu4_amd64.deb ...
+Unpacking pkg-config (0.29.1-0ubuntu4) ...
+Selecting previously unselected package zlib1g-dev:amd64.
+Preparing to unpack .../67-zlib1g-dev_1%3a1.2.11.dfsg-2ubuntu1.3_amd64.deb ...
+Unpacking zlib1g-dev:amd64 (1:1.2.11.dfsg-2ubuntu1.3) ...
+Selecting previously unselected package libglib2.0-dev:amd64.
+Preparing to unpack .../68-libglib2.0-dev_2.64.6-1~ubuntu20.04.4_amd64.deb ...
+Unpacking libglib2.0-dev:amd64 (2.64.6-1~ubuntu20.04.4) ...
+Selecting previously unselected package libmono-btls-interface4.0-cil.
+Preparing to unpack .../69-libmono-btls-interface4.0-cil_6.8.0.105+dfsg-2_amd64.deb ...
+Unpacking libmono-btls-interface4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-i18n4.0-cil.
+Preparing to unpack .../70-libmono-i18n4.0-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-i18n4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libmono-i18n-west4.0-cil.
+Preparing to unpack .../71-libmono-i18n-west4.0-cil_6.8.0.105+dfsg-2_all.deb ...
+Unpacking libmono-i18n-west4.0-cil (6.8.0.105+dfsg-2) ...
+Selecting previously unselected package libnorm1:amd64.
+Preparing to unpack .../72-libnorm1_1.5.8+dfsg2-2build1_amd64.deb ...
+Unpacking libnorm1:amd64 (1.5.8+dfsg2-2build1) ...
+Selecting previously unselected package libnorm-dev:amd64.
+Preparing to unpack .../73-libnorm-dev_1.5.8+dfsg2-2build1_amd64.deb ...
+Unpacking libnorm-dev:amd64 (1.5.8+dfsg2-2build1) ...
+Selecting previously unselected package libpgm-5.2-0:amd64.
+Preparing to unpack .../74-libpgm-5.2-0_5.2.122~dfsg-3ubuntu1_amd64.deb ...
+Unpacking libpgm-5.2-0:amd64 (5.2.122~dfsg-3ubuntu1) ...
+Selecting previously unselected package libpgm-dev:amd64.
+Preparing to unpack .../75-libpgm-dev_5.2.122~dfsg-3ubuntu1_amd64.deb ...
+Unpacking libpgm-dev:amd64 (5.2.122~dfsg-3ubuntu1) ...
+Selecting previously unselected package libsodium-dev:amd64.
+Preparing to unpack .../76-libsodium-dev_1.0.18-1_amd64.deb ...
+Unpacking libsodium-dev:amd64 (1.0.18-1) ...
+Selecting previously unselected package libzmq5:amd64.
+Preparing to unpack .../77-libzmq5_4.3.2-2ubuntu1_amd64.deb ...
+Unpacking libzmq5:amd64 (4.3.2-2ubuntu1) ...
+Selecting previously unselected package libkrb5-dev:amd64.
+Preparing to unpack .../78-libkrb5-dev_1.17-6ubuntu4.1_amd64.deb ...
+Unpacking libkrb5-dev:amd64 (1.17-6ubuntu4.1) ...
+Selecting previously unselected package libzmq3-dev:amd64.
+Preparing to unpack .../79-libzmq3-dev_4.3.2-2ubuntu1_amd64.deb ...
+Unpacking libzmq3-dev:amd64 (4.3.2-2ubuntu1) ...
+Setting up libpcrecpp0v5:amd64 (2:8.39-12ubuntu0.1) ...
+Setting up libpipeline1:amd64 (1.5.2-2build1) ...
+Setting up libmono-btls-interface4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up libxau6:amd64 (1:1.0.9-0ubuntu1) ...
+Setting up libpsl5:amd64 (0.21.0-1ubuntu1) ...
+Setting up libsodium23:amd64 (1.0.18-1) ...
+Setting up mime-support (3.64ubuntu1) ...
+Setting up libpcre16-3:amd64 (2:8.39-12ubuntu0.1) ...
+Setting up ca-certificates-mono (6.8.0.105+dfsg-2) ...
+Setting up xdg-user-dirs (0.17-2ubuntu1) ...
+Setting up libmagic-mgc (1:5.38-4) ...
+Setting up libglib2.0-0:amd64 (2.64.6-1~ubuntu20.04.4) ...
+No schema files found: doing nothing.
+Setting up libicu66:amd64 (66.1-2ubuntu2.1) ...
+Setting up libmono-i18n4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up libbrotli1:amd64 (1.0.7-6ubuntu0.1) ...
+Setting up libnorm1:amd64 (1.5.8+dfsg2-2build1) ...
+Setting up libnghttp2-14:amd64 (1.40.0-1build1) ...
+Setting up libmagic1:amd64 (1:5.38-4) ...
+Setting up libsepol1-dev:amd64 (3.0-1ubuntu0.1) ...
+Setting up less (551-1ubuntu0.1) ...
+Setting up libnorm-dev:amd64 (1.5.8+dfsg2-2build1) ...
+Setting up krb5-locales (1.17-6ubuntu4.1) ...
+Setting up file (1:5.38-4) ...
+Setting up libcbor0.6:amd64 (0.6.0-0ubuntu1) ...
+Setting up libffi-dev:amd64 (3.3-4) ...
+Setting up libpcre2-16-0:amd64 (10.34-7) ...
+Setting up liberror-perl (0.17029-1) ...
+Setting up libgssrpc4:amd64 (1.17-6ubuntu4.1) ...
+Setting up libpcre2-32-0:amd64 (10.34-7) ...
+Setting up libglib2.0-data (2.64.6-1~ubuntu20.04.4) ...
+Setting up libx11-data (2:1.6.9-2ubuntu1.2) ...
+Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2build1) ...
+Setting up cli-common (0.10) ...
+Setting up uuid-dev:amd64 (2.34-0.1ubuntu9.3) ...
+Setting up libmono-i18n-west4.0-cil (6.8.0.105+dfsg-2) ...
+Setting up comerr-dev:amd64 (2.1-1.45.5-2ubuntu1.1) ...
+Setting up libpcre32-3:amd64 (2:8.39-12ubuntu0.1) ...
+Setting up binfmt-support (2.2.0-2) ...
+invoke-rc.d: could not determine current runlevel
+invoke-rc.d: policy-rc.d denied execution of start.
+Setting up pkg-config (0.29.1-0ubuntu4) ...
+Setting up libpcre2-posix2:amd64 (10.34-7) ...
+Setting up libsodium-dev:amd64 (1.0.18-1) ...
+Setting up libssh-4:amd64 (0.9.3-2ubuntu2.2) ...
+Setting up zlib1g-dev:amd64 (1:1.2.11.dfsg-2ubuntu1.3) ...
+Setting up libkdb5-9:amd64 (1.17-6ubuntu4.1) ...
+Setting up git-man (1:2.25.1-1ubuntu3.4) ...
+Setting up libkadm5srv-mit11:amd64 (1.17-6ubuntu4.1) ...
+Setting up libmpdec2:amd64 (2.4.2-3) ...
+Setting up libpython3.8-stdlib:amd64 (3.8.10-0ubuntu1~20.04.4) ...
+Setting up libfido2-1:amd64 (1.3.1-1ubuntu2) ...
+Setting up python3.8 (3.8.10-0ubuntu1~20.04.4) ...
+Setting up libbsd0:amd64 (0.10.0-1) ...
+Setting up libelf1:amd64 (0.176-1.1build1) ...
+Setting up publicsuffix (20200303.0012-1) ...
+Setting up libxml2:amd64 (2.9.10+dfsg-5ubuntu0.20.04.3) ...
+Setting up libpython3-stdlib:amd64 (3.8.2-0ubuntu2) ...
+Setting up libpgm-5.2-0:amd64 (5.2.122~dfsg-3ubuntu1) ...
+Setting up libkadm5clnt-mit11:amd64 (1.17-6ubuntu4.1) ...
+Setting up libblkid-dev:amd64 (2.34-0.1ubuntu9.3) ...
+Setting up libglib2.0-cil (2.12.40-3) ...
+* Installing 1 assembly from libglib2.0-cil into Mono
+Setting up libxdmcp6:amd64 (1:1.1.3-0ubuntu1) ...
+Setting up libxcb1:amd64 (1.14-2) ...
+Setting up libzmq5:amd64 (4.3.2-2ubuntu1) ...
+Setting up libpcre2-dev:amd64 (10.34-7) ...
+Setting up libselinux1-dev:amd64 (3.0-1build2) ...
+Setting up libpcre3-dev:amd64 (2:8.39-12ubuntu0.1) ...
+Setting up libedit2:amd64 (3.1-20191231-1) ...
+Setting up libglib2.0-bin (2.64.6-1~ubuntu20.04.4) ...
+Setting up libcurl3-gnutls:amd64 (7.68.0-1ubuntu2.11) ...
+Setting up python3 (3.8.2-0ubuntu2) ...
+Setting up libpgm-dev:amd64 (5.2.122~dfsg-3ubuntu1) ...
+Setting up shared-mime-info (1.15-1) ...
+Setting up git (1:2.25.1-1ubuntu3.4) ...
+Setting up libgio-cil (2.22.3-3) ...
+Setting up libx11-6:amd64 (2:1.6.9-2ubuntu1.2) ...
+Setting up python3-lib2to3 (3.8.10-0ubuntu1~20.04) ...
+Setting up libmount-dev:amd64 (2.34-0.1ubuntu9.3) ...
+Setting up libxmuu1:amd64 (2:1.1.3-0ubuntu1) ...
+Setting up krb5-multidev:amd64 (1.17-6ubuntu4.1) ...
+Setting up python3-distutils (3.8.10-0ubuntu1~20.04) ...
+Setting up libglib2.0-dev-bin (2.64.6-1~ubuntu20.04.4) ...
+Setting up openssh-client (1:8.2p1-4ubuntu0.5) ...
+Setting up libxext6:amd64 (2:1.3.4-0ubuntu1) ...
+Setting up libkrb5-dev:amd64 (1.17-6ubuntu4.1) ...
+Setting up libglib2.0-dev:amd64 (2.64.6-1~ubuntu20.04.4) ...
+Setting up libgio2.0-cil-dev (2.22.3-3) ...
+Setting up xauth (1:1.1-0ubuntu1) ...
+Setting up libzmq3-dev:amd64 (4.3.2-2ubuntu1) ...
+Processing triggers for ca-certificates (20210119~20.04.2) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+Updating Mono key store
+Mono Certificate Store Sync - version 6.8.0.105
+Populate Mono certificate store from a concatenated list of certificates.
+Copyright 2002, 2003 Motus Technologies. Copyright 2004-2008 Novell. BSD licensed.
+
+Importing into legacy system store:
+I already trust 0, your new list has 128
+Certificate added: CN=ACCVRAIZ1, OU=PKIACCV, O=ACCV, C=ES
+Certificate added: C=ES, O=FNMT-RCM, OU=AC RAIZ FNMT-RCM
+Certificate added: C=IT, L=Milan, O=Actalis S.p.A./03358520967, CN=Actalis Authentication Root CA
+Certificate added: C=US, O=AffirmTrust, CN=AffirmTrust Commercial
+Certificate added: C=US, O=AffirmTrust, CN=AffirmTrust Networking
+Certificate added: C=US, O=AffirmTrust, CN=AffirmTrust Premium
+Certificate added: C=US, O=AffirmTrust, CN=AffirmTrust Premium ECC
+Certificate added: C=US, O=Amazon, CN=Amazon Root CA 1
+Certificate added: C=US, O=Amazon, CN=Amazon Root CA 2
+Certificate added: C=US, O=Amazon, CN=Amazon Root CA 3
+Certificate added: C=US, O=Amazon, CN=Amazon Root CA 4
+Certificate added: CN=Atos TrustedRoot 2011, O=Atos, C=DE
+Certificate added: C=ES, CN=Autoridad de Certificacion Firmaprofesional CIF A62634068
+Certificate added: C=IE, O=Baltimore, OU=CyberTrust, CN=Baltimore CyberTrust Root
+Certificate added: C=NO, O=Buypass AS-983163327, CN=Buypass Class 2 Root CA
+Certificate added: C=NO, O=Buypass AS-983163327, CN=Buypass Class 3 Root CA
+Certificate added: C=SK, L=Bratislava, O=Disig a.s., CN=CA Disig Root R2
+Certificate added: C=CN, O=China Financial Certification Authority, CN=CFCA EV ROOT
+Certificate added: C=GB, S=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Certification Authority
+Certificate added: C=GB, S=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Certification Authority
+Certificate added: C=GB, S=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Certification Authority
+Certificate added: C=FR, O=Dhimyotis, CN=Certigna
+Certificate added: C=FR, O=Dhimyotis, OU=0002 48146308100036, CN=Certigna Root CA
+Certificate added: C=PL, O=Unizeto Technologies S.A., OU=Certum Certification Authority, CN=Certum Trusted Network CA
+Certificate added: C=PL, O=Unizeto Technologies S.A., OU=Certum Certification Authority, CN=Certum Trusted Network CA 2
+Certificate added: C=EU, L=Madrid (see current address at www.camerfirma.com/address), SERIALNUMBER=A82743287, O=AC Camerfirma S.A., CN=Chambers of Commerce Root - 2008
+Certificate added: C=GB, S=Greater Manchester, L=Salford, O=Comodo CA Limited, CN=AAA Certificate Services
+Certificate added: O="Cybertrust, Inc", CN=Cybertrust Global Root
+Certificate added: C=DE, O=D-Trust GmbH, CN=D-TRUST Root Class 3 CA 2 2009
+Certificate added: C=DE, O=D-Trust GmbH, CN=D-TRUST Root Class 3 CA 2 EV 2009
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Assured ID Root CA
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Assured ID Root G2
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Assured ID Root G3
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Global Root CA
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Global Root G2
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Global Root G3
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert High Assurance EV Root CA
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Trusted Root G4
+Certificate added: C=TR, L=Ankara, O=E-Tu?ra EBG Bili?im Teknolojileri ve Hizmetleri A.?., OU=E-Tugra Sertifikasyon Merkezi, CN=E-Tugra Certification Authority
+Certificate added: C=ES, O=Agencia Catalana de Certificacio (NIF Q-0801176-I), OU=Serveis Publics de Certificacio, OU=Vegeu https://www.catcert.net/verarrel (c)03, OU=Jerarquia Entitats de Certificacio Catalanes, CN=EC-ACC
+Certificate added: O=Entrust.net, OU=www.entrust.net/CPS_2048 incorp. by ref. (limits liab.), OU=(c) 1999 Entrust.net Limited, CN=Entrust.net Certification Authority (2048)
+Certificate added: C=US, O="Entrust, Inc.", OU=www.entrust.net/CPS is incorporated by reference, OU="(c) 2006 Entrust, Inc.", CN=Entrust Root Certification Authority
+Certificate added: C=US, O="Entrust, Inc.", OU=See www.entrust.net/legal-terms, OU="(c) 2012 Entrust, Inc. - for authorized use only", CN=Entrust Root Certification Authority - EC1
+Certificate added: C=US, O="Entrust, Inc.", OU=See www.entrust.net/legal-terms, OU="(c) 2009 Entrust, Inc. - for authorized use only", CN=Entrust Root Certification Authority - G2
+Certificate added: C=US, O="Entrust, Inc.", OU=See www.entrust.net/legal-terms, OU="(c) 2015 Entrust, Inc. - for authorized use only", CN=Entrust Root Certification Authority - G4
+Certificate added: C=CN, O="GUANG DONG CERTIFICATE AUTHORITY CO.,LTD.", CN=GDCA TrustAUTH R5 ROOT
+Certificate added: C=US, O=Google Trust Services LLC, CN=GTS Root R1
+Certificate added: C=US, O=Google Trust Services LLC, CN=GTS Root R2
+Certificate added: C=US, O=Google Trust Services LLC, CN=GTS Root R3
+Certificate added: C=US, O=Google Trust Services LLC, CN=GTS Root R4
+Certificate added: C=US, O=GeoTrust Inc., OU=(c) 2007 GeoTrust Inc. - For authorized use only, CN=GeoTrust Primary Certification Authority - G2
+Certificate added: OU=GlobalSign ECC Root CA - R4, O=GlobalSign, CN=GlobalSign
+Certificate added: OU=GlobalSign ECC Root CA - R5, O=GlobalSign, CN=GlobalSign
+Certificate added: C=BE, O=GlobalSign nv-sa, OU=Root CA, CN=GlobalSign Root CA
+Certificate added: OU=GlobalSign Root CA - R2, O=GlobalSign, CN=GlobalSign
+Certificate added: OU=GlobalSign Root CA - R3, O=GlobalSign, CN=GlobalSign
+Certificate added: OU=GlobalSign Root CA - R6, O=GlobalSign, CN=GlobalSign
+Certificate added: C=EU, L=Madrid (see current address at www.camerfirma.com/address), SERIALNUMBER=A82743287, O=AC Camerfirma S.A., CN=Global Chambersign Root - 2008
+Certificate added: C=US, O="The Go Daddy Group, Inc.", OU=Go Daddy Class 2 Certification Authority
+Certificate added: C=US, S=Arizona, L=Scottsdale, O="GoDaddy.com, Inc.", CN=Go Daddy Root Certificate Authority - G2
+Certificate added: C=GR, L=Athens, O=Hellenic Academic and Research Institutions Cert. Authority, CN=Hellenic Academic and Research Institutions ECC RootCA 2015
+Certificate added: C=GR, O=Hellenic Academic and Research Institutions Cert. Authority, CN=Hellenic Academic and Research Institutions RootCA 2011
+Certificate added: C=GR, L=Athens, O=Hellenic Academic and Research Institutions Cert. Authority, CN=Hellenic Academic and Research Institutions RootCA 2015
+Certificate added: C=HK, O=Hongkong Post, CN=Hongkong Post Root CA 1
+Certificate added: C=HK, S=Hong Kong, L=Hong Kong, O=Hongkong Post, CN=Hongkong Post Root CA 3
+Certificate added: C=US, O=Internet Security Research Group, CN=ISRG Root X1
+Certificate added: C=US, O=IdenTrust, CN=IdenTrust Commercial Root CA 1
+Certificate added: C=US, O=IdenTrust, CN=IdenTrust Public Sector Root CA 1
+Certificate added: C=ES, O=IZENPE S.A., CN=Izenpe.com
+Certificate added: C=HU, L=Budapest, O=Microsec Ltd., CN=Microsec e-Szigno Root CA 2009, E=info@e-szigno.hu
+Certificate added: C=US, O=Microsoft Corporation, CN=Microsoft ECC Root Certificate Authority 2017
+Certificate added: C=US, O=Microsoft Corporation, CN=Microsoft RSA Root Certificate Authority 2017
+Certificate added: C=KR, O=NAVER BUSINESS PLATFORM Corp., CN=NAVER Global Root Certification Authority
+Certificate added: C=HU, L=Budapest, O=NetLock Kft., OU=Tan?s?tv?nykiad?k (Certification Services), CN=NetLock Arany (Class Gold) F?tan?s?tv?ny
+Certificate added: C=US, O=Network Solutions L.L.C., CN=Network Solutions Certificate Authority
+Certificate added: C=CH, O=WISeKey, OU=OISTE Foundation Endorsed, CN=OISTE WISeKey Global Root GB CA
+Certificate added: C=CH, O=WISeKey, OU=OISTE Foundation Endorsed, CN=OISTE WISeKey Global Root GC CA
+Certificate added: C=BM, O=QuoVadis Limited, OU=Root Certification Authority, CN=QuoVadis Root Certification Authority
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 1 G3
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 2
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 2 G3
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 3
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 3 G3
+Certificate added: C=US, S=Texas, L=Houston, O=SSL Corporation, CN=SSL.com EV Root Certification Authority ECC
+Certificate added: C=US, S=Texas, L=Houston, O=SSL Corporation, CN=SSL.com EV Root Certification Authority RSA R2
+Certificate added: C=US, S=Texas, L=Houston, O=SSL Corporation, CN=SSL.com Root Certification Authority ECC
+Certificate added: C=US, S=Texas, L=Houston, O=SSL Corporation, CN=SSL.com Root Certification Authority RSA
+Certificate added: C=PL, O=Krajowa Izba Rozliczeniowa S.A., CN=SZAFIR ROOT CA2
+Certificate added: C=JP, O="Japan Certification Services, Inc.", CN=SecureSign RootCA11
+Certificate added: C=US, O=SecureTrust Corporation, CN=SecureTrust CA
+Certificate added: C=US, O=SecureTrust Corporation, CN=Secure Global CA
+Certificate added: C=JP, O="SECOM Trust Systems CO.,LTD.", OU=Security Communication RootCA2
+Certificate added: C=JP, O=SECOM Trust.net, OU=Security Communication RootCA1
+Certificate added: C=FI, O=Sonera, CN=Sonera Class2 CA
+Certificate added: C=NL, O=Staat der Nederlanden, CN=Staat der Nederlanden EV Root CA
+Certificate added: C=NL, O=Staat der Nederlanden, CN=Staat der Nederlanden Root CA - G3
+Certificate added: C=US, O="Starfield Technologies, Inc.", OU=Starfield Class 2 Certification Authority
+Certificate added: C=US, S=Arizona, L=Scottsdale, O="Starfield Technologies, Inc.", CN=Starfield Root Certificate Authority - G2
+Certificate added: C=US, S=Arizona, L=Scottsdale, O="Starfield Technologies, Inc.", CN=Starfield Services Root Certificate Authority - G2
+Certificate added: C=CH, O=SwissSign AG, CN=SwissSign Gold CA - G2
+Certificate added: C=CH, O=SwissSign AG, CN=SwissSign Silver CA - G2
+Certificate added: C=DE, O=T-Systems Enterprise Services GmbH, OU=T-Systems Trust Center, CN=T-TeleSec GlobalRoot Class 2
+Certificate added: C=DE, O=T-Systems Enterprise Services GmbH, OU=T-Systems Trust Center, CN=T-TeleSec GlobalRoot Class 3
+Certificate added: C=TR, L=Gebze - Kocaeli, O=Turkiye Bilimsel ve Teknolojik Arastirma Kurumu - TUBITAK, OU=Kamu Sertifikasyon Merkezi - Kamu SM, CN=TUBITAK Kamu SM SSL Kok Sertifikasi - Surum 1
+Certificate added: C=TW, O=TAIWAN-CA, OU=Root CA, CN=TWCA Global Root CA
+Certificate added: C=TW, O=TAIWAN-CA, OU=Root CA, CN=TWCA Root Certification Authority
+Certificate added: O=TeliaSonera, CN=TeliaSonera Root CA v1
+Certificate added: C=PA, S=Panama, L=Panama City, O=TrustCor Systems S. de R.L., OU=TrustCor Certificate Authority, CN=TrustCor ECA-1
+Certificate added: C=PA, S=Panama, L=Panama City, O=TrustCor Systems S. de R.L., OU=TrustCor Certificate Authority, CN=TrustCor RootCert CA-1
+Certificate added: C=PA, S=Panama, L=Panama City, O=TrustCor Systems S. de R.L., OU=TrustCor Certificate Authority, CN=TrustCor RootCert CA-2
+Certificate added: C=GB, O=Trustis Limited, OU=Trustis FPS Root CA
+Certificate added: C=US, S=Illinois, L=Chicago, O="Trustwave Holdings, Inc.", CN=Trustwave Global Certification Authority
+Certificate added: C=US, S=Illinois, L=Chicago, O="Trustwave Holdings, Inc.", CN=Trustwave Global ECC P256 Certification Authority
+Certificate added: C=US, S=Illinois, L=Chicago, O="Trustwave Holdings, Inc.", CN=Trustwave Global ECC P384 Certification Authority
+Certificate added: C=CN, O=UniTrust, CN=UCA Extended Validation Root
+Certificate added: C=CN, O=UniTrust, CN=UCA Global G2 Root
+Certificate added: C=US, S=New Jersey, L=Jersey City, O=The USERTRUST Network, CN=USERTrust ECC Certification Authority
+Certificate added: C=US, S=New Jersey, L=Jersey City, O=The USERTRUST Network, CN=USERTrust RSA Certification Authority
+Certificate added: C=US, O="VeriSign, Inc.", OU=VeriSign Trust Network, OU="(c) 2008 VeriSign, Inc. - For authorized use only", CN=VeriSign Universal Root Certification Authority
+Certificate added: C=US, OU=www.xrampsecurity.com, O=XRamp Security Services Inc, CN=XRamp Global Certification Authority
+Certificate added: C=RO, O=certSIGN, OU=certSIGN ROOT CA
+Certificate added: C=RO, O=CERTSIGN SA, OU=certSIGN ROOT CA G2
+Certificate added: C=HU, L=Budapest, O=Microsec Ltd., OID.2.5.4.97=VATHU-23584497, CN=e-Szigno Root CA 2017
+Certificate added: C=TW, O="Chunghwa Telecom Co., Ltd.", OU=ePKI Root Certification Authority
+Certificate added: C=US, OU=emSign PKI, O=eMudhra Inc, CN=emSign ECC Root CA - C3
+Certificate added: C=IN, OU=emSign PKI, O=eMudhra Technologies Limited, CN=emSign ECC Root CA - G3
+Certificate added: C=US, OU=emSign PKI, O=eMudhra Inc, CN=emSign Root CA - C1
+Certificate added: C=IN, OU=emSign PKI, O=eMudhra Technologies Limited, CN=emSign Root CA - G1
+128 new root certificates were added to your trust store.
+Import process completed.
+
+Importing into BTLS system store:
+I already trust 0, your new list has 128
+Certificate added: CN=ACCVRAIZ1, OU=PKIACCV, O=ACCV, C=ES
+Certificate added: C=ES, O=FNMT-RCM, OU=AC RAIZ FNMT-RCM
+Certificate added: C=IT, L=Milan, O=Actalis S.p.A./03358520967, CN=Actalis Authentication Root CA
+Certificate added: C=US, O=AffirmTrust, CN=AffirmTrust Commercial
+Certificate added: C=US, O=AffirmTrust, CN=AffirmTrust Networking
+Certificate added: C=US, O=AffirmTrust, CN=AffirmTrust Premium
+Certificate added: C=US, O=AffirmTrust, CN=AffirmTrust Premium ECC
+Certificate added: C=US, O=Amazon, CN=Amazon Root CA 1
+Certificate added: C=US, O=Amazon, CN=Amazon Root CA 2
+Certificate added: C=US, O=Amazon, CN=Amazon Root CA 3
+Certificate added: C=US, O=Amazon, CN=Amazon Root CA 4
+Certificate added: CN=Atos TrustedRoot 2011, O=Atos, C=DE
+Certificate added: C=ES, CN=Autoridad de Certificacion Firmaprofesional CIF A62634068
+Certificate added: C=IE, O=Baltimore, OU=CyberTrust, CN=Baltimore CyberTrust Root
+Certificate added: C=NO, O=Buypass AS-983163327, CN=Buypass Class 2 Root CA
+Certificate added: C=NO, O=Buypass AS-983163327, CN=Buypass Class 3 Root CA
+Certificate added: C=SK, L=Bratislava, O=Disig a.s., CN=CA Disig Root R2
+Certificate added: C=CN, O=China Financial Certification Authority, CN=CFCA EV ROOT
+Certificate added: C=GB, S=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Certification Authority
+Certificate added: C=GB, S=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Certification Authority
+Certificate added: C=GB, S=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Certification Authority
+Certificate added: C=FR, O=Dhimyotis, CN=Certigna
+Certificate added: C=FR, O=Dhimyotis, OU=0002 48146308100036, CN=Certigna Root CA
+Certificate added: C=PL, O=Unizeto Technologies S.A., OU=Certum Certification Authority, CN=Certum Trusted Network CA
+Certificate added: C=PL, O=Unizeto Technologies S.A., OU=Certum Certification Authority, CN=Certum Trusted Network CA 2
+Certificate added: C=EU, L=Madrid (see current address at www.camerfirma.com/address), SERIALNUMBER=A82743287, O=AC Camerfirma S.A., CN=Chambers of Commerce Root - 2008
+Certificate added: C=GB, S=Greater Manchester, L=Salford, O=Comodo CA Limited, CN=AAA Certificate Services
+Certificate added: O="Cybertrust, Inc", CN=Cybertrust Global Root
+Certificate added: C=DE, O=D-Trust GmbH, CN=D-TRUST Root Class 3 CA 2 2009
+Certificate added: C=DE, O=D-Trust GmbH, CN=D-TRUST Root Class 3 CA 2 EV 2009
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Assured ID Root CA
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Assured ID Root G2
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Assured ID Root G3
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Global Root CA
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Global Root G2
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Global Root G3
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert High Assurance EV Root CA
+Certificate added: C=US, O=DigiCert Inc, OU=www.digicert.com, CN=DigiCert Trusted Root G4
+Certificate added: C=TR, L=Ankara, O=E-Tu?ra EBG Bili?im Teknolojileri ve Hizmetleri A.?., OU=E-Tugra Sertifikasyon Merkezi, CN=E-Tugra Certification Authority
+Certificate added: C=ES, O=Agencia Catalana de Certificacio (NIF Q-0801176-I), OU=Serveis Publics de Certificacio, OU=Vegeu https://www.catcert.net/verarrel (c)03, OU=Jerarquia Entitats de Certificacio Catalanes, CN=EC-ACC
+Certificate added: O=Entrust.net, OU=www.entrust.net/CPS_2048 incorp. by ref. (limits liab.), OU=(c) 1999 Entrust.net Limited, CN=Entrust.net Certification Authority (2048)
+Certificate added: C=US, O="Entrust, Inc.", OU=www.entrust.net/CPS is incorporated by reference, OU="(c) 2006 Entrust, Inc.", CN=Entrust Root Certification Authority
+Certificate added: C=US, O="Entrust, Inc.", OU=See www.entrust.net/legal-terms, OU="(c) 2012 Entrust, Inc. - for authorized use only", CN=Entrust Root Certification Authority - EC1
+Certificate added: C=US, O="Entrust, Inc.", OU=See www.entrust.net/legal-terms, OU="(c) 2009 Entrust, Inc. - for authorized use only", CN=Entrust Root Certification Authority - G2
+Certificate added: C=US, O="Entrust, Inc.", OU=See www.entrust.net/legal-terms, OU="(c) 2015 Entrust, Inc. - for authorized use only", CN=Entrust Root Certification Authority - G4
+Certificate added: C=CN, O="GUANG DONG CERTIFICATE AUTHORITY CO.,LTD.", CN=GDCA TrustAUTH R5 ROOT
+Certificate added: C=US, O=Google Trust Services LLC, CN=GTS Root R1
+Certificate added: C=US, O=Google Trust Services LLC, CN=GTS Root R2
+Certificate added: C=US, O=Google Trust Services LLC, CN=GTS Root R3
+Certificate added: C=US, O=Google Trust Services LLC, CN=GTS Root R4
+Certificate added: C=US, O=GeoTrust Inc., OU=(c) 2007 GeoTrust Inc. - For authorized use only, CN=GeoTrust Primary Certification Authority - G2
+Certificate added: OU=GlobalSign ECC Root CA - R4, O=GlobalSign, CN=GlobalSign
+Certificate added: OU=GlobalSign ECC Root CA - R5, O=GlobalSign, CN=GlobalSign
+Certificate added: C=BE, O=GlobalSign nv-sa, OU=Root CA, CN=GlobalSign Root CA
+Certificate added: OU=GlobalSign Root CA - R2, O=GlobalSign, CN=GlobalSign
+Certificate added: OU=GlobalSign Root CA - R3, O=GlobalSign, CN=GlobalSign
+Certificate added: OU=GlobalSign Root CA - R6, O=GlobalSign, CN=GlobalSign
+Certificate added: C=EU, L=Madrid (see current address at www.camerfirma.com/address), SERIALNUMBER=A82743287, O=AC Camerfirma S.A., CN=Global Chambersign Root - 2008
+Certificate added: C=US, O="The Go Daddy Group, Inc.", OU=Go Daddy Class 2 Certification Authority
+Certificate added: C=US, S=Arizona, L=Scottsdale, O="GoDaddy.com, Inc.", CN=Go Daddy Root Certificate Authority - G2
+Certificate added: C=GR, L=Athens, O=Hellenic Academic and Research Institutions Cert. Authority, CN=Hellenic Academic and Research Institutions ECC RootCA 2015
+Certificate added: C=GR, O=Hellenic Academic and Research Institutions Cert. Authority, CN=Hellenic Academic and Research Institutions RootCA 2011
+Certificate added: C=GR, L=Athens, O=Hellenic Academic and Research Institutions Cert. Authority, CN=Hellenic Academic and Research Institutions RootCA 2015
+Certificate added: C=HK, O=Hongkong Post, CN=Hongkong Post Root CA 1
+Certificate added: C=HK, S=Hong Kong, L=Hong Kong, O=Hongkong Post, CN=Hongkong Post Root CA 3
+Certificate added: C=US, O=Internet Security Research Group, CN=ISRG Root X1
+Certificate added: C=US, O=IdenTrust, CN=IdenTrust Commercial Root CA 1
+Certificate added: C=US, O=IdenTrust, CN=IdenTrust Public Sector Root CA 1
+Certificate added: C=ES, O=IZENPE S.A., CN=Izenpe.com
+Certificate added: C=HU, L=Budapest, O=Microsec Ltd., CN=Microsec e-Szigno Root CA 2009, E=info@e-szigno.hu
+Certificate added: C=US, O=Microsoft Corporation, CN=Microsoft ECC Root Certificate Authority 2017
+Certificate added: C=US, O=Microsoft Corporation, CN=Microsoft RSA Root Certificate Authority 2017
+Certificate added: C=KR, O=NAVER BUSINESS PLATFORM Corp., CN=NAVER Global Root Certification Authority
+Certificate added: C=HU, L=Budapest, O=NetLock Kft., OU=Tan?s?tv?nykiad?k (Certification Services), CN=NetLock Arany (Class Gold) F?tan?s?tv?ny
+Certificate added: C=US, O=Network Solutions L.L.C., CN=Network Solutions Certificate Authority
+Certificate added: C=CH, O=WISeKey, OU=OISTE Foundation Endorsed, CN=OISTE WISeKey Global Root GB CA
+Certificate added: C=CH, O=WISeKey, OU=OISTE Foundation Endorsed, CN=OISTE WISeKey Global Root GC CA
+Certificate added: C=BM, O=QuoVadis Limited, OU=Root Certification Authority, CN=QuoVadis Root Certification Authority
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 1 G3
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 2
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 2 G3
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 3
+Certificate added: C=BM, O=QuoVadis Limited, CN=QuoVadis Root CA 3 G3
+Certificate added: C=US, S=Texas, L=Houston, O=SSL Corporation, CN=SSL.com EV Root Certification Authority ECC
+Certificate added: C=US, S=Texas, L=Houston, O=SSL Corporation, CN=SSL.com EV Root Certification Authority RSA R2
+Certificate added: C=US, S=Texas, L=Houston, O=SSL Corporation, CN=SSL.com Root Certification Authority ECC
+Certificate added: C=US, S=Texas, L=Houston, O=SSL Corporation, CN=SSL.com Root Certification Authority RSA
+Certificate added: C=PL, O=Krajowa Izba Rozliczeniowa S.A., CN=SZAFIR ROOT CA2
+Certificate added: C=JP, O="Japan Certification Services, Inc.", CN=SecureSign RootCA11
+Certificate added: C=US, O=SecureTrust Corporation, CN=SecureTrust CA
+Certificate added: C=US, O=SecureTrust Corporation, CN=Secure Global CA
+Certificate added: C=JP, O="SECOM Trust Systems CO.,LTD.", OU=Security Communication RootCA2
+Certificate added: C=JP, O=SECOM Trust.net, OU=Security Communication RootCA1
+Certificate added: C=FI, O=Sonera, CN=Sonera Class2 CA
+Certificate added: C=NL, O=Staat der Nederlanden, CN=Staat der Nederlanden EV Root CA
+Certificate added: C=NL, O=Staat der Nederlanden, CN=Staat der Nederlanden Root CA - G3
+Certificate added: C=US, O="Starfield Technologies, Inc.", OU=Starfield Class 2 Certification Authority
+Certificate added: C=US, S=Arizona, L=Scottsdale, O="Starfield Technologies, Inc.", CN=Starfield Root Certificate Authority - G2
+Certificate added: C=US, S=Arizona, L=Scottsdale, O="Starfield Technologies, Inc.", CN=Starfield Services Root Certificate Authority - G2
+Certificate added: C=CH, O=SwissSign AG, CN=SwissSign Gold CA - G2
+Certificate added: C=CH, O=SwissSign AG, CN=SwissSign Silver CA - G2
+Certificate added: C=DE, O=T-Systems Enterprise Services GmbH, OU=T-Systems Trust Center, CN=T-TeleSec GlobalRoot Class 2
+Certificate added: C=DE, O=T-Systems Enterprise Services GmbH, OU=T-Systems Trust Center, CN=T-TeleSec GlobalRoot Class 3
+Certificate added: C=TR, L=Gebze - Kocaeli, O=Turkiye Bilimsel ve Teknolojik Arastirma Kurumu - TUBITAK, OU=Kamu Sertifikasyon Merkezi - Kamu SM, CN=TUBITAK Kamu SM SSL Kok Sertifikasi - Surum 1
+Certificate added: C=TW, O=TAIWAN-CA, OU=Root CA, CN=TWCA Global Root CA
+Certificate added: C=TW, O=TAIWAN-CA, OU=Root CA, CN=TWCA Root Certification Authority
+Certificate added: O=TeliaSonera, CN=TeliaSonera Root CA v1
+Certificate added: C=PA, S=Panama, L=Panama City, O=TrustCor Systems S. de R.L., OU=TrustCor Certificate Authority, CN=TrustCor ECA-1
+Certificate added: C=PA, S=Panama, L=Panama City, O=TrustCor Systems S. de R.L., OU=TrustCor Certificate Authority, CN=TrustCor RootCert CA-1
+Certificate added: C=PA, S=Panama, L=Panama City, O=TrustCor Systems S. de R.L., OU=TrustCor Certificate Authority, CN=TrustCor RootCert CA-2
+Certificate added: C=GB, O=Trustis Limited, OU=Trustis FPS Root CA
+Certificate added: C=US, S=Illinois, L=Chicago, O="Trustwave Holdings, Inc.", CN=Trustwave Global Certification Authority
+Certificate added: C=US, S=Illinois, L=Chicago, O="Trustwave Holdings, Inc.", CN=Trustwave Global ECC P256 Certification Authority
+Certificate added: C=US, S=Illinois, L=Chicago, O="Trustwave Holdings, Inc.", CN=Trustwave Global ECC P384 Certification Authority
+Certificate added: C=CN, O=UniTrust, CN=UCA Extended Validation Root
+Certificate added: C=CN, O=UniTrust, CN=UCA Global G2 Root
+Certificate added: C=US, S=New Jersey, L=Jersey City, O=The USERTRUST Network, CN=USERTrust ECC Certification Authority
+Certificate added: C=US, S=New Jersey, L=Jersey City, O=The USERTRUST Network, CN=USERTrust RSA Certification Authority
+Certificate added: C=US, O="VeriSign, Inc.", OU=VeriSign Trust Network, OU="(c) 2008 VeriSign, Inc. - For authorized use only", CN=VeriSign Universal Root Certification Authority
+Certificate added: C=US, OU=www.xrampsecurity.com, O=XRamp Security Services Inc, CN=XRamp Global Certification Authority
+Certificate added: C=RO, O=certSIGN, OU=certSIGN ROOT CA
+Certificate added: C=RO, O=CERTSIGN SA, OU=certSIGN ROOT CA G2
+Certificate added: C=HU, L=Budapest, O=Microsec Ltd., OID.2.5.4.97=VATHU-23584497, CN=e-Szigno Root CA 2017
+Certificate added: C=TW, O="Chunghwa Telecom Co., Ltd.", OU=ePKI Root Certification Authority
+Certificate added: C=US, OU=emSign PKI, O=eMudhra Inc, CN=emSign ECC Root CA - C3
+Certificate added: C=IN, OU=emSign PKI, O=eMudhra Technologies Limited, CN=emSign ECC Root CA - G3
+Certificate added: C=US, OU=emSign PKI, O=eMudhra Inc, CN=emSign Root CA - C1
+Certificate added: C=IN, OU=emSign PKI, O=eMudhra Technologies Limited, CN=emSign Root CA - G1
+128 new root certificates were added to your trust store.
+Import process completed.
+Done
+done.
+Processing triggers for libc-bin (2.31-0ubuntu9.7) ...
+[91mCloning into 'Gemini'...
+[0m[91mAlready on 'master'
+[0mYour branch is up to date with 'origin/master'.
+make: Entering directory '/tmp/build/Gemini/src'
+/usr/local/cuda/bin/nvcc -ccbin g++ -m64 --compiler-options "-fPIC -O2 -isystem /usr/include/mit-krb5 -I/usr/include/pgm-5.2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -pthread -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include" -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_72,code=sm_72 -gencode arch=compute_75,code=sm_75 -o hook.o -c hook.cpp
+[91mhook.cpp: In function 'size_t CUarray_format_to_size_t(CUarray_format)':
+hook.cpp:604:1: warning: control reaches end of non-void function [-Wreturn-type]
+  604 | }
+      | ^
+[0m[91mhook.cpp: In function 'void configure_connection()':
+hook.cpp:270:34: warning: '%s' directive output may be truncated writing up to 4095 bytes into a region of size 4090 [-Wformat-truncation=]
+  270 |   snprintf(url, PATH_MAX, "ipc://%s/%s", ipc_dir, group_name);
+      |                                  ^~      ~~~~~~~
+[0m[91mIn file included from /usr/include/stdio.h:867,
+                 from /usr/include/c++/9/cstdio:42,
+                 from hook.cpp:42:
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:67:35: note: '__builtin___snprintf_chk' output between 8 and 4166 bytes into a destination of size 4096
+   67 |   return __builtin___snprintf_chk (__s, __n, __USE_FORTIFY_LEVEL - 1,
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   68 |        __bos (__s), __fmt, __va_arg_pack ());
+      |        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0mg++ -fPIC -O2 -isystem /usr/include/mit-krb5 -I/usr/include/pgm-5.2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -pthread -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o predictor.o -c predictor.cpp
+g++ -fPIC -O2 -isystem /usr/include/mit-krb5 -I/usr/include/pgm-5.2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -pthread -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o debug.o -c debug.cpp
+[91mdebug.cpp: In function 'void sprint_date(char*, size_t)':
+debug.cpp:31:26: warning: '%06ld' directive output may be truncated writing between 6 and 17 bytes into a region of size 9 [-Wformat-truncation=]
+   31 |   snprintf(ms_buf, 10, ".%06ld", ts.tv_nsec / 1000);
+      |                          ^~~~~
+debug.cpp:31:24: note: directive argument in the range [-9223372036854775, 9223372036854775]
+   31 |   snprintf(ms_buf, 10, ".%06ld", ts.tv_nsec / 1000);
+      |                        ^~~~~~~~
+In file included from /usr/include/stdio.h:867,
+                 from /usr/include/c++/9/cstdio:42,
+                 from debug.h:23,
+                 from debug.cpp:17:
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:67:35: note: '__builtin___snprintf_chk' output between 8 and 19 bytes into a destination of size 10
+   67 |   return __builtin___snprintf_chk (__s, __n, __USE_FORTIFY_LEVEL - 1,
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   68 |        __bos (__s), __fmt, __va_arg_pack ());
+      |        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0mmake[1]: Entering directory '/tmp/build/Gemini/src/comm'
+g++ -O2 -Wall -fPIC -c endpoint.cpp -o endpoint.o
+[91mendpoint.cpp: In member function 'std::string Endpoint::getZmqErrorMsg()':
+endpoint.cpp:66:63: warning: format not a string literal and no format arguments [-Wformat-security]
+   66 |   snprintf(err_msg, sizeof(err_msg), zmq_strerror(zmq_errno()));
+      |                                                               ^
+[0m[91mendpoint.cpp: In member function 'int Requester::submit(Request&, Response*)':
+endpoint.cpp:93:21: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<zmq_msg_t>::size_type' {aka 'long unsigned int'} [-Wsign-compare]
+   93 |   for (int i = 0; i < frames.size(); i++) {
+      |                   ~~^~~~~~~~~~~~~~~
+[0m[91mendpoint.cpp: In member function 'int Responder::getRequest(Request*)':
+endpoint.cpp:111:21: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<zmq_msg_t>::size_type' {aka 'long unsigned int'} [-Wsign-compare]
+  111 |   for (int i = 0; i < frames.size(); i++) {
+      |                   ~~^~~~~~~~~~~~~~~
+[0mg++ -O2 -Wall -fPIC -c message.cpp -o message.o
+[91mmessage.cpp: In member function 'void Message::deserialize(std::vector<zmq_msg_t>&)':
+message.cpp:51:21: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<zmq_msg_t>::size_type' {aka 'long unsigned int'} [-Wsign-compare]
+   51 |   for (int i = 0; i < zmq_frames.size(); i++) {
+      |                   ~~^~~~~~~~~~~~~~~~~~~
+[0m[91mmessage.cpp: In member function 'void Message::clear()':
+message.cpp:57:21: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<std::pair<char*, long unsigned int> >::size_type' {aka 'long unsigned int'} [-Wsign-compare]
+   57 |   for (int i = 0; i < frames_.size(); i++) {
+      |                   ~~^~~~~~~~~~~~~~~~
+[0mg++ -O2 -Wall -fPIC -c request.cpp -o request.o
+g++ -O2 -Wall -fPIC -c response.cpp -o response.o
+make[1]: Leaving directory '/tmp/build/Gemini/src/comm'
+/usr/local/cuda/bin/nvcc -ccbin g++ hook.o predictor.o debug.o comm/endpoint.o comm/message.o comm/request.o comm/response.o \
+	-shared -m64 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_72,code=sm_72 -gencode arch=compute_75,code=sm_75 -lcuda -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ldl -lrt -lzmq -lglib-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -o libgemhook.so.1
+mkdir -p /tmp/build/Gemini/src/../lib
+/usr/bin/install -s -m 755 -t /tmp/build/Gemini/src/../lib libgemhook.so.1
+g++ -fPIC -O2 -isystem /usr/include/mit-krb5 -I/usr/include/pgm-5.2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -pthread -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o scheduler.o -c scheduler.cpp
+[91mscheduler.cpp: In function 'void* clientGroupMgmt(void*)':
+scheduler.cpp:480:34: warning: '%s' directive output may be truncated writing up to 4095 bytes into a region of size 4090 [-Wformat-truncation=]
+  480 |   snprintf(url, PATH_MAX, "ipc://%s/%s", ipc_dir, group->getName().c_str());
+      |                                  ^~      ~~~~~~~
+[0m[91mIn file included from /usr/include/stdio.h:867,
+                 from /usr/include/c++/9/cstdio:42,
+                 from /usr/include/c++/9/ext/string_conversions.h:43,
+                 from /usr/include/c++/9/bits/basic_string.h:6496,
+                 from /usr/include/c++/9/string:55,
+                 from /usr/include/c++/9/stdexcept:39,
+                 from /usr/include/c++/9/array:39,
+                 from /usr/include/c++/9/tuple:39,
+                 from /usr/include/c++/9/bits/stl_map.h:63,
+                 from /usr/include/c++/9/map:61,
+                 from scheduler.h:23,
+                 from scheduler.cpp:24:
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:67:35: note: '__builtin___snprintf_chk' output 8 or more bytes (assuming 4103) into a destination of size 4096
+   67 |   return __builtin___snprintf_chk (__s, __n, __USE_FORTIFY_LEVEL - 1,
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   68 |        __bos (__s), __fmt, __va_arg_pack ());
+      |        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0mg++ -fPIC -O2 -isystem /usr/include/mit-krb5 -I/usr/include/pgm-5.2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -pthread -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o schd-priority.o -c schd-priority.cpp
+g++ -fPIC -O2 -isystem /usr/include/mit-krb5 -I/usr/include/pgm-5.2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -pthread -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o parse-config.o -c parse-config.cpp
+g++ scheduler.o schd-priority.o debug.o parse-config.o comm/endpoint.o comm/message.o comm/request.o comm/response.o \
+	-ldl -lrt -lzmq -lglib-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -pthread -rdynamic -o gem-schd
+mkdir -p /tmp/build/Gemini/src/../bin
+/usr/bin/install -s -m 755 -t /tmp/build/Gemini/src/../bin gem-schd
+g++ -fPIC -O2 -isystem /usr/include/mit-krb5 -I/usr/include/pgm-5.2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -pthread -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o pod-manager.o -c pod-manager.cpp
+g++ -fPIC -fPIC -O2 -isystem /usr/include/mit-krb5 -I/usr/include/pgm-5.2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -pthread -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o comm.o -c comm.cpp
+[91mcomm.cpp: In function 'reqid_t prepare_request(char*, comm_request_t, ...)':
+comm.cpp:51:5: warning: second parameter of 'va_start' not last named argument [-Wvarargs]
+   51 |     va_start(vl, 3);
+      |     ^~~~~~~~
+[0m[91mcomm.cpp:56:5: warning: second parameter of 'va_start' not last named argument [-Wvarargs]
+   56 |     va_start(vl, 2);
+      |     ^~~~~~~~
+[0m[91mcomm.cpp: In function 'size_t prepare_response(char*, comm_request_t, reqid_t, ...)':
+comm.cpp:94:5: warning: second parameter of 'va_start' not last named argument [-Wvarargs]
+   94 |     va_start(vl, 1);
+      |     ^~~~~~~~
+comm.cpp:98:5: warning: second parameter of 'va_start' not last named argument [-Wvarargs]
+   98 |     va_start(vl, 1);
+      |     ^~~~~~~~
+[0m[91mcomm.cpp:102:5: warning: second parameter of 'va_start' not last named argument [-Wvarargs]
+  102 |     va_start(vl, 2);
+      |     ^~~~~~~~
+[0mg++ -ldl -lrt -lzmq -lglib-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -pthread -rdynamic pod-manager.o debug.o comm.o -o gem-pmgr
+mkdir -p /tmp/build/Gemini/src/../bin
+cp gem-pmgr /tmp/build/Gemini/src/../bin
+make: Leaving directory '/tmp/build/Gemini/src'
+Removing intermediate container a075f4bd6e73
+ ---> 616854b88fd9
+Step 7/19 : FROM python:3.8.1-buster
+ ---> efdecc2e377a
+Step 8/19 : RUN pip3 install inotify
+ ---> Using cache
+ ---> 1e40f68fc418
+Step 9/19 : ENV NVIDIA_VISIBLE_DEVICES      all
+ ---> Using cache
+ ---> b0796a10957a
+Step 10/19 : ENV NVIDIA_DRIVER_CAPABILITIES  utility
+ ---> Using cache
+ ---> a5247a94558d
+Step 11/19 : COPY docker/lib/libdl.so.2          /lib
+ ---> Using cache
+ ---> a4fe4d47b23c
+Step 12/19 : COPY docker/lib/libnvidia-ml.so.1   /lib
+ ---> Using cache
+ ---> aef18b8543a5
+Step 13/19 : RUN echo "***************************************************"
+ ---> Running in 2d4ebab01fb0
+***************************************************
+Removing intermediate container 2d4ebab01fb0
+ ---> e96e6ae72864
+Step 14/19 : RUN find | grep libzmq*
+ ---> Running in 41637c38bc1f

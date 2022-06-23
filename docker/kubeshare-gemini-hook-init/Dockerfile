@@ -8,8 +8,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=US/Central
 
 RUN apt update && \
-    apt install -y git tzdata pkg-config libzmq3-dev libglib2.0-dev libgio2.0-cil-dev && \
-    git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && \
+    apt install -y git && \
+    git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && git checkout v1.0-branch  && \
     make -C src
 
 # FROM busybox:1.31.1-glibc

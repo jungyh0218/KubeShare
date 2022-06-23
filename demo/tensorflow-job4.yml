@@ -1,0 +1,18 @@
+apiVersion: kubeshare.nthu/v1
+kind: SharePod
+metadata:
+  name: tensorflow-pod3
+  annotations:
+    "kubeshare/gpu_request": "0.5" # required if allocating GPU
+    "kubeshare/gpu_limit": "1.0" # required if allocating GPU
+    "kubeshare/gpu_mem": "10737418240" # required if allocating GPU # 10Gi, in bytes
+spec:
+  restartPolicy: Never
+  containers:
+    - name: tensorflow-job-container
+      image:  nvcr.io/nvidia/tensorflow:21.03-tf1-py3
+      command: ["/bin/sh", "-c", "python /workspace/nvidia-examples/cnn/alexnet.py" ]
+          #args: ["-c", "python /workspace/nvidia-examples/cnn/resnet.py --layers=50 --batch_size=64"]
+          #resources:
+          # limits:
+          #nvidia.com/gpu: 1
