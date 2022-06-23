@@ -1,0 +1,80 @@
+Name:         sharepod1
+Namespace:    default
+Priority:     0
+Node:         gpu02/10.128.0.50
+Start Time:   Fri, 17 Jun 2022 07:52:07 +0000
+Labels:       <none>
+Annotations:  cni.projectcalico.org/containerID: 34d5f4f1f5871a5fcbd99c29c77f3b025d7738f8af9e7d090c765ea08b2550f1
+              cni.projectcalico.org/podIP: 10.233.112.38/32
+              cni.projectcalico.org/podIPs: 10.233.112.38/32
+              kubeshare/GPUID: dwzyt
+              kubeshare/gpu_limit: 1.0
+              kubeshare/gpu_mem: 3145728000
+              kubeshare/gpu_request: 0.5
+Status:       Running
+IP:           10.233.112.38
+IPs:
+  IP:           10.233.112.38
+Controlled By:  SharePod/sharepod1
+Containers:
+  cuda:
+    Container ID:  containerd://9712b512c0ae6e9edecba368de2f14a20fb9d950eab279c3cc15bc2e8acf60f0
+    Image:         nvidia/cuda:9.0-base
+    Image ID:      docker.io/nvidia/cuda@sha256:c8faefab71dabdffa31dcf411bd6df072e3d9a4a54d49d46a993b4a945b9d37f
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      sleep infinity
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    127
+      Started:      Fri, 17 Jun 2022 07:57:45 +0000
+      Finished:     Fri, 17 Jun 2022 07:57:45 +0000
+    Ready:          False
+    Restart Count:  6
+    Environment:
+      NVIDIA_VISIBLE_DEVICES:      GPU-859aa3b8-cc40-01ef-0ceb-79d1992f8527
+      NVIDIA_DRIVER_CAPABILITIES:  compute,utility
+      LD_PRELOAD:                  /kubeshare/library/libgemhook.so.1
+      POD_MANAGER_IP:              10.233.112.35
+      POD_MANAGER_PORT:            50051
+      POD_NAME:                    default/sharepod1
+    Mounts:
+      /kubeshare/library from kubeshare-lib (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-knsx6 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  kubeshare-lib:
+    Type:          HostPath (bare host directory volume)
+    Path:          /kubeshare/library
+    HostPathType:  
+  kube-api-access-knsx6:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason   Age                     From     Message
+  ----     ------   ----                    ----     -------
+  Normal   Pulled   8m21s                   kubelet  Successfully pulled image "nvidia/cuda:9.0-base" in 412.772451ms
+  Normal   Pulled   8m20s                   kubelet  Successfully pulled image "nvidia/cuda:9.0-base" in 572.316199ms
+  Normal   Pulled   8m3s                    kubelet  Successfully pulled image "nvidia/cuda:9.0-base" in 360.81432ms
+  Normal   Created  7m38s (x4 over 8m21s)   kubelet  Created container cuda
+  Normal   Started  7m38s (x4 over 8m21s)   kubelet  Started container cuda
+  Normal   Pulled   7m38s                   kubelet  Successfully pulled image "nvidia/cuda:9.0-base" in 384.63426ms
+  Normal   Pulling  6m48s (x5 over 8m22s)   kubelet  Pulling image "nvidia/cuda:9.0-base"
+  Warning  BackOff  3m10s (x26 over 8m20s)  kubelet  Back-off restarting failed container

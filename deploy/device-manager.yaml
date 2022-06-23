@@ -80,6 +80,7 @@ spec:
   containers:
   - name: kubeshare-device-manager
     image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-device-manager:1.0.0
+    imagePullPolicy: Always
 
 ---
 
@@ -106,13 +107,15 @@ spec:
         effect: NoSchedule
       initContainers:
       - name: gemini-hook-init
-        image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-gemini-hook-init:1.0.0
+        image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-gemini-hook-init:1.0.2
+        imagePullPolicy: Always
         volumeMounts:
         - name: "kubeshare-library"
           mountPath: /kubeshare/library
       containers:
       - name: config-client
         image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-config-client:1.0.0
+        imagePullPolicy: Always
         env:
         - name: KUBESHARE_SCHEDULER_IP
           valueFrom:
@@ -124,7 +127,8 @@ spec:
         - name: "kubeshare-library"
           mountPath: "/kubeshare/library"
       - name: gemini-scheduler
-        image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-gemini-scheduler:1.0.1
+        image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-gemini-scheduler:1.0.3
+        imagePullPolicy: Always
         volumeMounts:
         - name: "kubeshare-scheduler"
           mountPath: "/kubeshare/scheduler"

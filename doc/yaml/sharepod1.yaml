@@ -10,5 +10,6 @@ spec:
   terminationGracePeriodSeconds: 0
   containers:
   - name: cuda
-    image: nvidia/cuda:9.0-base
-    command: ["sh", "-c", "nvidia-smi -L; sleep infinity"]
+    image: nvidia/cuda:11.6.1-base-ubuntu20.04 
+    imagePullPolicy: Always
+    command: ["sh", "-c", "sleep infinity"]
