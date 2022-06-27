@@ -6,9 +6,6 @@ WORKDIR /tmp/build
 
 COPY . kubeshare
 
-ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=US/Central
-
 RUN apt update && \
     apt install -y git && \
     git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && git checkout v1.0-branch && \
@@ -27,8 +24,5 @@ COPY --from=build /tmp/build/kubeshare/docker/kubeshare-gemini-scheduler/launche
 COPY --from=build /tmp/build/kubeshare/docker/kubeshare-gemini-scheduler/launcher.py /launcher.py
 COPY --from=build /tmp/build/Gemini/bin/gem-schd /gem-schd
 COPY --from=build /tmp/build/Gemini/bin/gem-pmgr /gem-pmgr
-
-#RUN apt update && \
-#    apt install -y tzdata pkg-config libzmq3-dev libglib2.0-dev libgio2.0-cil-dev
 
 CMD ["/launcher-multigpus.sh", "/kubeshare/scheduler/config", "/kubeshare/scheduler/podmanagerport"]
