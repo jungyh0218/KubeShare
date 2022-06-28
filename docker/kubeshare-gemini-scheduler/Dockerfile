@@ -2,17 +2,22 @@
 
 FROM nvidia/cuda:11.6.1-devel-ubuntu20.04 AS build
 
+# call from repo root
+
+#FROM nvidia/cuda:10.0-devel AS build
+
 WORKDIR /tmp/build
 
 COPY . kubeshare
 
 RUN apt update && \
     apt install -y git && \
-    git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && git checkout v1.0-branch && \
+    git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && git checkout 11.3-support && \
     make -C src
 
 FROM python:3.8.1-buster
-RUN pip3 install inotify 
+
+RUN pip3 install inotify
 
 ENV NVIDIA_VISIBLE_DEVICES      all
 ENV NVIDIA_DRIVER_CAPABILITIES  utility

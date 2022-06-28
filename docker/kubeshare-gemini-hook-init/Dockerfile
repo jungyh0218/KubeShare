@@ -9,7 +9,7 @@ ENV TZ=US/Central
 
 RUN apt update && \
     apt install -y git && \
-    git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && git checkout v1.0-branch  && \
+    git clone https://github.com/jungyh0218/Gemini.git && cd Gemini && git checkout 11.3-support  && \
     make -C src
 
 # FROM busybox:1.31.1-glibc
