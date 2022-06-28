@@ -113,7 +113,7 @@ spec:
           mountPath: /kubeshare/library
       containers:
       - name: config-client
-        image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-config-client:1.0.0
+        image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-config-client:1.0.1
         env:
         - name: KUBESHARE_SCHEDULER_IP
           valueFrom:
@@ -125,7 +125,7 @@ spec:
         - name: "kubeshare-library"
           mountPath: "/kubeshare/library"
       - name: gemini-scheduler
-        image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-gemini-scheduler:1.0.8
+        image: us-central1-docker.pkg.dev/aiinfralab-backendai/kubeshare/kubeshare-gemini-scheduler:1.0.9
         volumeMounts:
         - name: "kubeshare-scheduler"
           mountPath: "/kubeshare/scheduler"

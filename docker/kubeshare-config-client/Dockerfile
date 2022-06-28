@@ -1,6 +1,6 @@
 # call from repo root
 
-FROM ubuntu:20.04 AS build
+FROM ubuntu:18.04 AS build
 
 ENV GOLANG_VERSION 1.13.5
 ENV GOPATH /go

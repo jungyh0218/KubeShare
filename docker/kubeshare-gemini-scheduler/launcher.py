@@ -23,8 +23,8 @@ def launch_scheduler():
     cfg_h, cfg_t = os.path.split(args.pod_list)
     if cfg_h == '':
         cfg_h = os.getcwd()
-    cmd = "{} -p {} -f {} -q {} -m {} -w {}".format(
-        args.schd, cfg_h, cfg_t, args.base_quota, args.min_quota, args.window
+    cmd = "{} -p {} -f {} -P {} -q {} -m {} -w {}".format(
+        args.schd, cfg_h, cfg_t, args.port, args.base_quota, args.min_quota, args.window
     )
     proc = sp.Popen(shlex.split(cmd), universal_newlines=True, bufsize=1)
     return proc
